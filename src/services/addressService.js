@@ -2,44 +2,35 @@ import api from './api'
 
 async function createAddress(body){
     try{
-        const response = await api.post(`/products`, body);
+        const response = await api.post(`/address`, body);
         return response.data;
     }catch(err){
         throw new Error (err.response?.data?.message || err.message);
     }
 }
 
-async function getAllProducts(){
-    try{
-        const response = await api.get(`/products`);
-        return response.data;
 
-    }catch(err){
-        throw new Error (err.response?.data?.message || err.message);
-    }
-}
-
-async function getProductById(id){
+async function getUserAddress(){
     try{
-        const response = await api.get(`/products/${id}`);
+        const response = await api.get(`/address`);
         return response.data;
     }catch(err){
         throw new Error (err.response?.data?.message || err.message);
     }
 }
 
-async function updateProduct(id, body){
+async function updateAddress(id, body){
     try{
-        const response = await api.put(`/products/${id}`, body);
+        const response = await api.put(`/address/${id}`, body);
         return response.data;
     }catch(err){
         throw new Error (err.response?.data?.message || err.message);
     }
 }
 
-async function deleteProduct(id){
+async function deleteAddress(id){
     try{
-        const response = await api.delete(`/products/${id}`);
+        const response = await api.delete(`/address/${id}`);
         return response.data;
     }catch(err){
         throw new Error (err.response?.data?.message || err.message);
@@ -47,5 +38,8 @@ async function deleteProduct(id){
 }
 
 export {
-  
+  createAddress,
+  getUserAddress,
+  updateAddress,
+  deleteAddress
 };
