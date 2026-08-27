@@ -9,6 +9,15 @@ async function createDiscount(body){
     }
 }
 
+async function getAllDiscounts(){
+    try{
+        const response = await api.get(`/discounts`);
+        return response.data;
+    }catch(err){
+        throw new Error (err.response?.data?.message || err.message);
+    }
+}
+
 async function applyDiscount(code){
     try{
         const response = await api.post(`/discounts/apply`, { code });
@@ -20,5 +29,6 @@ async function applyDiscount(code){
 
 export {
     createDiscount,
+    getAllDiscounts,
     applyDiscount
 }
