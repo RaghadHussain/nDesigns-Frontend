@@ -9,10 +9,12 @@ function Signup() {
     username: "",
     password: "",
     passwordConf: "",
+    email: "",
+    phoneNumber: 0
   });
   const [ submitting, setSubmitting ] = useState(false)
 
-  const { username, password, passwordConf } = formData;
+  const { username, password, passwordConf, email, phoneNumber } = formData;
 
   function handleChange(event){
     setError("");
@@ -71,6 +73,28 @@ function Signup() {
             id="confirm"
             value={passwordConf}
             name="passwordConf"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email">E-mail:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            name="email"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="phoneNumber">Phone Number:</label>
+          <input
+            type="text"
+            id="phoneNumber"
+            value={phoneNumber}
+            name="phoneNumber"
             onChange={handleChange}
             required
           />
