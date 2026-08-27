@@ -171,7 +171,7 @@ function ProductsPage() {
 
             <main>
                 <div>
-                    <nav>
+                    <div>
                         <Link to="/">Home</Link>
                         <span> / </span>
                         <Link to="/products">Shop</Link>
@@ -181,7 +181,7 @@ function ProductsPage() {
                                 <span>{selectedCategoryName}</span>
                             </>
                         )}
-                    </nav>
+                    </div>
 
                     <label>
                         Sort by:{" "}

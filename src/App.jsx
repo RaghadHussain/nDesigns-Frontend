@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useLocation } from "react-router";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import SignupPage from "./pages/SignupPage";
 import Homepage from "./pages/Homepage";
 import SignInPage from "./pages/SigninPage";
@@ -11,6 +12,13 @@ import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./context/AuthContext";
 function App() {
+  const location = useLocation();
+
+  let showFooter = true;
+  if (location.pathname === "/sign-in" || location.pathname === "/sign-up") {
+    showFooter = false;
+  }
+
   return (
     <div>
       <Navbar/>
@@ -21,6 +29,7 @@ function App() {
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/products" element={<ProductsPage/>}/>
       </Routes>
+      {showFooter && <Footer />}
     </div>
   );
 }
