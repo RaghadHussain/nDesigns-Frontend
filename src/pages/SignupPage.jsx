@@ -10,7 +10,7 @@ function Signup() {
     password: "",
     passwordConf: "",
     email: "",
-    phoneNumber: 0
+    phoneNumber: ""
   });
   const [ submitting, setSubmitting ] = useState(false)
 
