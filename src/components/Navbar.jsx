@@ -10,8 +10,7 @@ function Navbar() {
       <Link to='/products'>Shop</Link>
       <Search />
       {user
-      ?
-      (<>
+      ? (<>
       <Link to='/account/profile'>Profile</Link>
       {user?.role === 'admin'
       ? (<>
@@ -19,12 +18,12 @@ function Navbar() {
         <Link to='/admin/discounts'>Discounts</Link>
         <button onClick={logout}>Sign Out</button>
       </>)
-      : user
-      ? (<>
+      : (<>
       <Link to='/cart'>Cart</Link>
       <button onClick={logout}>Sign Out</button>
-      </>) :
-      (<>
+      </>)}
+      </>)
+      : (<>
         <Link to='/sign-up'>Sign Up</Link>
         <Link to='/sign-in'>Sign In</Link>
       </>)}
