@@ -11,13 +11,7 @@ function Footer() {
                 </p>
                 <ul>
                     <li>
-                        <a href="https://instagram.com">Instagram</a>
-                    </li>
-                    <li>
-                        <a href="https://facebook.com">Facebook</a>
-                    </li>
-                    <li>
-                        <a href="https://x.com">X</a>
+                        <a href="https://www.instagram.com/n.designs.bh?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==">Instagram</a>
                     </li>
                 </ul>
             </div>

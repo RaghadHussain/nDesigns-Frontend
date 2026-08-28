@@ -12,6 +12,7 @@ function Navbar() {
       {user
       ?
       (<>
+      <Link to='/account/profile'>Profile</Link>
       <Link to='/cart'>Cart</Link>
       <button onClick={logout}>Sign Out</button>
       </>) :
