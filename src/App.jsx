@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import ProductsPage from "./pages/product/ProductsPage";
 import ProductDetailPage from "./pages/product/ProductDetailPage";
 import SearchResultsPage from "./pages/product/SearchResultsPage";
+import CartPage from "./pages/product/cart/CartPage";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -32,6 +33,7 @@ function App() {
         <Route path="/products" element={<ProductsPage/>}/>
         <Route path="/products/:id" element= {<ProductDetailPage/>}/>
         <Route path="/search" element={<SearchResultsPage/>}/>
+        <Route path="/cart" element={<ProtectedRoute><CartPage/></ProtectedRoute>}/>
       </Routes>
       {showFooter && <Footer />}
     </div>

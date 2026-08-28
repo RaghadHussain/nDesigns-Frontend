@@ -1,6 +1,5 @@
 import { Link } from "react-router";
-
-const SERVER_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
+import getImageUrl from "../../utils/imageUrl";
 
 function ProductCard({ product }) {
     const firstImage = product.images && product.images[0];
@@ -9,7 +8,7 @@ function ProductCard({ product }) {
         <article>
             <Link to={`/products/${product._id}`}>
                 {firstImage ? (
-                    <img src={`${SERVER_URL}${firstImage}`} alt={product.name} />
+                    <img src={getImageUrl(firstImage)} alt={product.name} />
                 ) : (
                     <div>{product.name}</div>
                 )}
