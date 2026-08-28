@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { useAuth } from '../context/AuthContext'
+import Search from './Search'
 
 function Navbar() {
   const { logout, user} = useAuth()
@@ -7,6 +8,7 @@ function Navbar() {
     <nav>
       <Link to='/'>Home</Link>
       <Link to='/products'>Shop</Link>
+      <Search />
       {user
       ? 
       (<>
