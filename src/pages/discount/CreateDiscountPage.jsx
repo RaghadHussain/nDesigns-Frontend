@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { createDiscount } from '../../services/discountService';
+import AdminSidebar from '../../components/admin/AdminSidebar';
 
 const CreateDiscountPage = ({}) => {
   const navigate = useNavigate();
@@ -30,7 +31,9 @@ const CreateDiscountPage = ({}) => {
   };
 
   return (
-    <main>
+    <div>
+      <AdminSidebar />
+      <main>
       <h1>Create Discount</h1>
       <p className='error'>{error}</p>
       <form autoComplete='off' onSubmit={handleSubmit}>
@@ -94,7 +97,8 @@ const CreateDiscountPage = ({}) => {
           <button type='button' onClick={() => navigate('/admin/discounts')}>Cancel</button>
         </div>
       </form>
-    </main>
+      </main>
+    </div>
   );
 };
 

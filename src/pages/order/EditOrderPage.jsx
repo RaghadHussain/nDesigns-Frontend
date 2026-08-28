@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 import { getOrderById, updateOrderStatus } from '../../services/orderService';
+import AdminSidebar from '../../components/admin/AdminSidebar';
 
 const ORDER_STATUSES = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
 
@@ -43,39 +44,49 @@ const EditOrderPage = ({}) => {
     }
   };
 
-  if (!order) return <p>Loading...</p>
+  if (!order) {
+    return (
+      <div>
+        <AdminSidebar />
+        <main><p>Loading...</p></main>
+      </div>
+    );
+  }
 
   return (
-    <main>
-      <h1>Order {order._id}</h1>
-      <p className='error'>{error}</p>
-      <p>Subtotal: {order.subTotal}</p>
-      <p>Discount: {order.discountAmount}</p>
-      <p>Delivery Fee: {order.deliveryFee}</p>
-      <p>Total: {order.totalAmount}</p>
+    <div>
+      <AdminSidebar />
+      <main>
+        <h1>Order {order._id}</h1>
+        <p className='error'>{error}</p>
+        <p>Subtotal: {order.subTotal}</p>
+        <p>Discount: {order.discountAmount}</p>
+        <p>Delivery Fee: {order.deliveryFee}</p>
+        <p>Total: {order.totalAmount}</p>
 
-      <h2>Items</h2>
-      <ul>
-        {items.map((item) => (
-          <li key={item._id}>{item.variantId.size} x {item.quantity} - {item.totalPrice}</li>
-        ))}
-      </ul>
+        <h2>Items</h2>
+        <ul>
+          {items.map((item) => (
+            <li key={item._id}>{item.variantId.size} x {item.quantity} - {item.totalPrice}</li>
+          ))}
+        </ul>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='status'>Status:</label>
-          <select id='status' name='status' value={status} onChange={handleChange}>
-            {ORDER_STATUSES.map((option) => (
-              <option key={option} value={option}>{option}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <button>Update Status</button>
-          <button type='button' onClick={() => navigate('/admin/orders')}>Cancel</button>
-        </div>
-      </form>
-    </main>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor='status'>Status:</label>
+            <select id='status' name='status' value={status} onChange={handleChange}>
+              {ORDER_STATUSES.map((option) => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <button>Update Status</button>
+            <button type='button' onClick={() => navigate('/admin/orders')}>Cancel</button>
+          </div>
+        </form>
+      </main>
+    </div>
   );
 };
 

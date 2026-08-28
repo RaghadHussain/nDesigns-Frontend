@@ -24,15 +24,16 @@ import OrderConfirmationPage from "./pages/checkout/OrderConfirmationPage";
 import ProfilePage from "./pages/account/ProfilePage";
 function App() {
   const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   let showFooter = true;
-  if (location.pathname === "/sign-in" || location.pathname === "/sign-up") {
+  if (location.pathname === "/sign-in" || location.pathname === "/sign-up" || isAdminRoute) {
     showFooter = false;
   }
 
   return (
     <div>
-      <Navbar/>
+      {!isAdminRoute && <Navbar/>}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/sign-up" element={<SignupPage />} />
