@@ -31,10 +31,20 @@ function logout(){
 
 }
 
+async function updateUserDetails(id, body){
+    try{
+        const response = await api.put(`/auth/${id}/editDetails`, body);
+        return response.data;
+    }catch(err){
+        throw new Error (err.response?.data?.message || err.message);
+    }
+}
+
 export {
   signUp,
   signIn,
   getCurrentUser,
-  logout
+  logout,
+  updateUserDetails
 };
 

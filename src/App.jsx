@@ -21,6 +21,7 @@ import AdminOrdersPage from "./pages/order/AdminOrdersPage";
 import EditOrderPage from "./pages/order/EditOrderPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
 import OrderConfirmationPage from "./pages/checkout/OrderConfirmationPage";
+import ProfilePage from "./pages/account/ProfilePage";
 function App() {
   const location = useLocation();
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/sign-up" element={<SignupPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/account/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
         <Route path="/products" element={<ProductsPage/>}/>
         <Route path="/products/:id" element= {<ProductDetailPage/>}/>
         <Route path="/search" element={<SearchResultsPage/>}/>
