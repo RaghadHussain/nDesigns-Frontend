@@ -7,12 +7,14 @@ import { getCategoryById } from '../../services/categoryService';
 import { createCartItem } from '../../services/cartItemService';
 import { useAuth } from '../../context/AuthContext'
 import ProductCard from '../../components/product/ProductCard'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const SERVER_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
 
 function ProductDetailPage() {
     const [product, setProduct] = useState();
+    useDocumentTitle(product ? product.name : "Product");
     const [variants, setVariants] = useState([]);
     const [category, setCategory] = useState(null);
     const [recommended, setRecommended] = useState([]);

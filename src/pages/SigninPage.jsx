@@ -5,9 +5,11 @@ import { useNavigate } from 'react-router';
 
 import { signIn } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 
 const SignInForm = ({}) => {
+  useDocumentTitle("Sign In")
   const {setUser} = useAuth()
   const navigate = useNavigate();
   const [error, setError] = useState('');

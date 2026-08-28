@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 
 import { getAllDiscounts } from '../../services/discountService';
 import AdminSidebar from '../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const AdminDiscountsPage = ({}) => {
+  useDocumentTitle("Discounts")
   const [discounts, setDiscounts] = useState([]);
   const [error, setError] = useState('');
 

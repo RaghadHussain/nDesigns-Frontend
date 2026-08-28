@@ -3,10 +3,12 @@ import { useNavigate, useParams } from 'react-router';
 
 import { getOrderById, updateOrderStatus } from '../../services/orderService';
 import AdminSidebar from '../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const ORDER_STATUSES = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
 
 const EditOrderPage = ({}) => {
+  useDocumentTitle("Edit Order")
   const { id } = useParams();
   const navigate = useNavigate();
   const [order, setOrder] = useState(null);

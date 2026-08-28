@@ -1,3 +1,5 @@
+import React from 'react'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 import { Link } from 'react-router';
 
 const NEW_EDIT_ITEMS = [
@@ -8,6 +10,7 @@ const NEW_EDIT_ITEMS = [
 ];
 
 function Homepage() {
+  useDocumentTitle("Home")
   return (
     <main className='homepage'>
       <section className='homepage-hero'>

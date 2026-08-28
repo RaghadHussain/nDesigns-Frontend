@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { signUp } from "../services/authService";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 function Signup() {
+  useDocumentTitle("Sign Up")
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({

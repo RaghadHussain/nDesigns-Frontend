@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 
 import { getAllOrders } from '../../services/orderService';
 import AdminSidebar from '../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const AdminOrdersPage = ({}) => {
+  useDocumentTitle("Orders")
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState('');
 

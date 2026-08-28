@@ -4,10 +4,12 @@ import { getCart } from '../../../services/cartService'
 import { updateCartItem, deleteCartItem } from '../../../services/cartItemService'
 import { getProductById } from '../../../services/productService'
 import getImageUrl from '../../../utils/imageUrl'
+import useDocumentTitle from '../../../hooks/useDocumentTitle'
 
 const DELIVERY_FEE = 2
 
 function CartPage() {
+    useDocumentTitle("Cart")
     const [cartItems, setCartItems] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
