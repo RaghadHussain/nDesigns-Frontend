@@ -22,6 +22,7 @@ import EditOrderPage from "./pages/order/EditOrderPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
 import OrderConfirmationPage from "./pages/checkout/OrderConfirmationPage";
 import ProfilePage from "./pages/account/ProfilePage";
+import OrderHistoryPage from "./pages/account/OrderHistoryPage";
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -40,6 +41,7 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/account/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/account/orders" element={<ProtectedRoute><OrderHistoryPage /></ProtectedRoute>} />
         <Route path="/products" element={<ProductsPage/>}/>
         <Route path="/products/:id" element= {<ProductDetailPage/>}/>
         <Route path="/search" element={<SearchResultsPage/>}/>

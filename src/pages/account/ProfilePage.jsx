@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router'
 
 import { useAuth } from '../../context/AuthContext'
 import { updateUserDetails } from '../../services/authService'
@@ -124,6 +125,8 @@ function ProfilePage() {
   return (
     <main>
       <h1>My Profile</h1>
+
+      <p><Link to='/account/orders'>View Order History</Link></p>
 
       <section>
         <h2>Account Details</h2>
@@ -268,7 +271,7 @@ function ProfilePage() {
           </div>
         ) : (
           <div>
-            <p>No address on file.</p>
+            <p>No address yet</p>
             <button onClick={startEditAddress}>Add Address</button>
           </div>
         )}
