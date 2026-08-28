@@ -7,6 +7,7 @@ import Homepage from "./pages/Homepage";
 import SignInPage from "./pages/SigninPage";
 import Dashboard from "./pages/Dashboard";
 import ProductsPage from "./pages/product/ProductsPage";
+import ProductDetailPage from "./pages/product/ProductDetailPage";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/products" element={<ProductsPage/>}/>
+        <Route path="/products/:id" element= {<ProductDetailPage/>}/>
       </Routes>
       {showFooter && <Footer />}
     </div>
