@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { FiSearch } from 'react-icons/fi'
 import { search } from '../services/productService'
+import getImageUrl from '../utils/imageUrl'
 
-const SERVER_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 const SUGGESTIONS_LIMIT = 5;
 
 function Search() {
@@ -53,7 +53,7 @@ function Search() {
                 <input
                     type="text"
                     id="searchBox"
-                    placeholder="🔍︎ Search Here ..."
+                    placeholder="Search Here ..."
                     value={query}
                     onChange={(event) => {
                         setQuery(event.target.value);
@@ -83,7 +83,7 @@ function Search() {
                                         onClick={() => setShowSuggestions(false)}
                                     >
                                         {firstImage && (
-                                            <img src={`${SERVER_URL}${firstImage}`} alt={product.name} width="40" />
+                                            <img src={getImageUrl(firstImage)} alt={product.name} width="40" />
                                         )}
                                         <strong>{product.name}</strong>
                                     </Link>

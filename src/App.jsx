@@ -8,6 +8,7 @@ import SignInPage from "./pages/SigninPage";
 import Dashboard from "./pages/Dashboard";
 import ProductsPage from "./pages/product/ProductsPage";
 import SearchResultsPage from "./pages/product/SearchResultsPage";
+import CartPage from "./pages/product/cart/CartPage";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/products" element={<ProductsPage/>}/>
         <Route path="/search" element={<SearchResultsPage/>}/>
+        <Route path="/cart" element={<ProtectedRoute><CartPage/></ProtectedRoute>}/>
       </Routes>
       {showFooter && <Footer />}
     </div>
