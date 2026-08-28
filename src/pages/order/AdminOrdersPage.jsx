@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 
 import { getAllOrders } from '../../services/orderService';
+import AdminSidebar from '../../components/admin/AdminSidebar';
 
 const AdminOrdersPage = ({}) => {
   const [orders, setOrders] = useState([]);
@@ -21,32 +22,35 @@ const AdminOrdersPage = ({}) => {
   }, []);
 
   return (
-    <main>
-      <h1>Orders</h1>
-      <p className='error'>{error}</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Order</th>
-            <th>Status</th>
-            <th>Total</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order._id}>
-              <td>{order._id}</td>
-              <td>{order.orderStatus}</td>
-              <td>{order.totalAmount}</td>
-              <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-              <td><Link to={`/admin/orders/${order._id}`}>Edit</Link></td>
+    <div>
+      <AdminSidebar />
+      <main>
+        <h1>Orders</h1>
+        <p className='error'>{error}</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Status</th>
+              <th>Total</th>
+              <th>Date</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </main>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order._id}>
+                <td>{order._id}</td>
+                <td>{order.orderStatus}</td>
+                <td>{order.totalAmount}</td>
+                <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                <td><Link to={`/admin/orders/${order._id}`}>Edit</Link></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
+    </div>
   );
 };
 
