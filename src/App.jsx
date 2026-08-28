@@ -7,7 +7,9 @@ import Homepage from "./pages/Homepage";
 import SignInPage from "./pages/SigninPage";
 import Dashboard from "./pages/Dashboard";
 import ProductsPage from "./pages/product/ProductsPage";
+import ProductDetailPage from "./pages/product/ProductDetailPage";
 import SearchResultsPage from "./pages/product/SearchResultsPage";
+import CartPage from "./pages/product/cart/CartPage";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -36,6 +38,7 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/products" element={<ProductsPage/>}/>
+        <Route path="/products/:id" element= {<ProductDetailPage/>}/>
         <Route path="/search" element={<SearchResultsPage/>}/>
         <Route path="/admin/discounts" element={<AdminRoute><AdminDiscountsPage /></AdminRoute>} />
         <Route path="/admin/discounts/new" element={<AdminRoute><CreateDiscountPage /></AdminRoute>} />
@@ -43,6 +46,7 @@ function App() {
         <Route path="/admin/orders/:id" element={<AdminRoute><EditOrderPage /></AdminRoute>} />
         <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
         <Route path="/checkout/confirmation/:id" element={<ProtectedRoute><OrderConfirmationPage /></ProtectedRoute>} />
+        <Route path="/cart" element={<ProtectedRoute><CartPage/></ProtectedRoute>}/>
       </Routes>
       {showFooter && <Footer />}
     </div>
