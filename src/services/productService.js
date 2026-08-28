@@ -46,10 +46,20 @@ async function deleteProduct(id){
     }
 }
 
+async function search(query){
+    try{
+        const response = await api.get(`/products/search?q=${query}`)
+        return response.data
+    }catch(err){
+        throw new Error (err.response?.data?.message || err.message);
+    }
+}
+
 export {
     createProduct,
     getAllProducts,
     getProductById,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    search
 }
