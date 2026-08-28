@@ -5,10 +5,12 @@ import { getAllCategories } from "../../services/categoryService";
 import { getVariantByProduct } from "../../services/productVariantService";
 import ShopSidebar from "../../components/product/ShopSidebar";
 import ProductCard from "../../components/product/ProductCard";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 const PRODUCTS_PER_PAGE = 9;
 
 function ProductsPage() {
+    useDocumentTitle("Shop");
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);

@@ -3,8 +3,10 @@ import { useSearchParams } from "react-router";
 import { search } from "../../services/productService";
 import { getVariantByProduct } from "../../services/productVariantService";
 import ProductCard from "../../components/product/ProductCard";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
 
 function SearchResultsPage() {
+    useDocumentTitle("Search Results");
     const [searchParams] = useSearchParams();
     const query = searchParams.get("q") || "";
 

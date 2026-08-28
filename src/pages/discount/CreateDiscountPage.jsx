@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router';
 
 import { createDiscount } from '../../services/discountService';
 import AdminSidebar from '../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const CreateDiscountPage = ({}) => {
+  useDocumentTitle("Create Discount")
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({

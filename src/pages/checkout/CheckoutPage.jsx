@@ -5,8 +5,10 @@ import { getCart } from '../../services/cartService';
 import { getUserAddress } from '../../services/addressService';
 import { applyDiscount } from '../../services/discountService';
 import { checkout } from '../../services/checkoutService';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const CheckoutPage = ({}) => {
+  useDocumentTitle("Checkout")
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [address, setAddress] = useState(null);

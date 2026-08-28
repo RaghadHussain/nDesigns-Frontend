@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
 
 import { getOrderById } from '../../services/orderService';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const OrderConfirmationPage = ({}) => {
+  useDocumentTitle("Order Confirmed")
   const { id } = useParams();
   const [order, setOrder] = useState(null);
   const [items, setItems] = useState([]);

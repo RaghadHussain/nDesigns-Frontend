@@ -4,8 +4,10 @@ import { Link } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 import { updateUserDetails } from '../../services/authService'
 import { createAddress, getUserAddress, updateAddress } from '../../services/addressService'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 function ProfilePage() {
+  useDocumentTitle("My Profile")
   const { user, setUser } = useAuth()
 
   const [address, setAddress] = useState(null)

@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router'
 
 import { getMyOrders } from '../../services/orderService'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 function OrderHistoryPage() {
+  useDocumentTitle("Order History")
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
