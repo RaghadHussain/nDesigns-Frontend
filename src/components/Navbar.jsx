@@ -9,9 +9,14 @@ function Navbar() {
       <Link to='/'>Home</Link>
       <Link to='/products'>Shop</Link>
       <Search />
-      {user
-      ?
-      (<>
+      {user?.role === 'admin'
+      ? (<>
+        <Link to='/admin/orders'>Orders</Link>
+        <Link to='/admin/discounts'>Discounts</Link>
+        <button onClick={logout}>Sign Out</button>
+      </>)
+      : user
+      ? (<>
       <Link to='/cart'>Cart</Link>
       <button onClick={logout}>Sign Out</button>
       </>) :
