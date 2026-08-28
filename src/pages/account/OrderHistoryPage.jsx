@@ -55,7 +55,7 @@ function OrderHistoryPage() {
                 <td>{order.orderStatus}</td>
                 <td>{order.totalAmount}</td>
                 <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td><Link to={`/checkout/confirmation/${order._id}`}>View</Link></td>
+                <td><Link to={`/account/orders/${order._id}`}>View</Link></td>
               </tr>
             ))}
           </tbody>
