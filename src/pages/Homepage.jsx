@@ -1,16 +1,51 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import { Link } from 'react-router';
+import { getAllProducts } from '../services/productService';
+import { getAllCategories } from '../services/categoryService';
+import { getVariantByProduct } from '../services/productVariantService';
+import getImageUrl from '../utils/imageUrl';
 
-const NEW_EDIT_ITEMS = [
-  { id: 1, label: 'Minimalist Collection', name: 'Classic Crepe Abaya', price: 'BD 40' },
-  { id: 2, label: 'Heritage Edit', name: 'Embellished Silk Jalabiya', price: 'BD 20' },
-  { id: 3, label: 'Comfort Range', name: 'Linen Utility Outerwear', price: 'BD 22' },
-  { id: 4, label: 'Evening Festive', name: 'Organza Flare Abaya', price: 'BD 20' },
-];
+const NEW_ARRIVALS_COUNT = 4;
 
 function Homepage() {
   useDocumentTitle("Home")
+  const [newArrivals, setNewArrivals] = useState([]);
+  const [curationCategories, setCurationCategories] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    async function fetchHomepageData() {
+      try {
+        const [products, categories] = await Promise.all([
+          getAllProducts(),
+          getAllCategories(),
+        ]);
+
+        const newestProducts = [...products]
+          .sort((productA, productB) => new Date(productB.createdAt) - new Date(productA.createdAt))
+          .slice(0, NEW_ARRIVALS_COUNT);
+
+        const newestWithPrices = await Promise.all(
+          newestProducts.map(async (product) => {
+            const variants = await getVariantByProduct(product._id);
+            const prices = variants.map((variant) => variant.price);
+            return {
+              ...product,
+              lowestPrice: prices.length ? Math.min(...prices) : null,
+            };
+          })
+        );
+
+        setNewArrivals(newestWithPrices);
+        setCurationCategories(categories.filter((category) => !category.parentCategory));
+      } catch (err) {
+        setError(err.message);
+      }
+    }
+    fetchHomepageData();
+  }, []);
+
   return (
     <main className='homepage'>
       <section className='homepage-hero'>
@@ -31,56 +66,50 @@ function Homepage() {
       <section className='homepage-curation'>
         <h2>Signature Curation</h2>
         <p>Discover our twin anchors of luxury Modest clothing</p>
+        <p className='error'>{error}</p>
 
         <div className='homepage-curation__grid'>
-          <div className='homepage-curation__card'>
-            <div className='placeholder-image'>
-              <span>Luxury Abayas</span>
-            </div>
-            <div className='homepage-curation__card-footer'>
-              <h3>The Abaya Range</h3>
-              <Link to='/products'>View All</Link>
-            </div>
-          </div>
-
-          <div className='homepage-curation__card'>
-            <div className='placeholder-image'>
-              <span>Elegant Jalabiyas</span>
-            </div>
-            <div className='homepage-curation__card-footer'>
-              <h3>Classic Jalabiyas</h3>
-              <Link to='/products'>View All</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className='homepage-new-edit'>
-        <div className='homepage-new-edit__header'>
-          <div>
-            <h2>The New Edit</h2>
-            <p>Freshly woven pieces crafted from our finest silks and linens</p>
-          </div>
-          <Link to='/products' className='btn btn--outline'>View All Arrivals</Link>
-        </div>
-
-        <div className='homepage-new-edit__grid'>
-          {NEW_EDIT_ITEMS.map((item) => (
-            <div key={item.id} className='homepage-new-edit__card'>
+          {curationCategories.map((category) => (
+            <div key={category._id} className='homepage-curation__card'>
               <div className='placeholder-image'>
-                <span>{item.label}</span>
+                <span>{category.name}</span>
               </div>
-              <h4>{item.name}</h4>
-              <p>{item.price}</p>
+              <div className='homepage-curation__card-footer'>
+                <h3>{category.name}</h3>
+                <Link to={`/products?category=${category._id}`}>View All</Link>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className='homepage-release'>
-        <p className='eyebrow'>Limited Private Release</p>
-        <h2>The Silk Heritage Collection is now available for pre order</h2>
-        <Link to='/products' className='btn btn--primary'>Access Private Sale</Link>
+      <section className='homepage-new-arrivals'>
+        <div className='homepage-new-arrivals__header'>
+          <div>
+            <h2>New Arrivals</h2>
+            <p>Freshly woven pieces crafted from our finest silks and linens</p>
+          </div>
+          <Link to='/products' className='btn btn--outline'>View All Arrivals</Link>
+        </div>
+
+        <div className='homepage-new-arrivals__grid'>
+          {newArrivals.map((item) => {
+            const firstImage = item.images && item.images[0];
+            return (
+              <Link key={item._id} to={`/products/${item._id}`} className='homepage-new-arrivals__card'>
+                <div className='placeholder-image'>
+                  {firstImage ? (
+                    <img src={getImageUrl(firstImage)} alt={item.name} />
+                  ) : (
+                    <span>{item.name}</span>
+                  )}
+                </div>
+                <h4>{item.name}</h4>
+                <p>{item.lowestPrice !== null ? `BHD ${item.lowestPrice}` : '—'}</p>
+              </Link>
+            );
+          })}
+        </div>
       </section>
     </main>
   );
