@@ -5,7 +5,7 @@ import { getDashboardStats, getRecentOrders } from '../services/orderService';
 import AdminSidebar from '../components/admin/AdminSidebar';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
-const AdminDashboard = ({}) => {
+const AdminDashboard = () => {
   useDocumentTitle("Admin Dashboard")
   const { user } = useAuth();
   const [search, setSearch] = useState('');
