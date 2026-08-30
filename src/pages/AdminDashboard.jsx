@@ -48,11 +48,11 @@ const AdminDashboard = () => {
       <main>
         <header>
           <div>
-            <h1>Atelier Overview</h1>
+            <h1>Admin Overview</h1>
             <p>Real-time sales, order volume, and active tailored designs.</p>
           </div>
           <div>
-            <span>{user?.username || 'Atelier Manager'}</span>
+            <span>{user?.username || 'Admin Manager'}</span>
           </div>
         </header>
 
@@ -69,7 +69,7 @@ const AdminDashboard = () => {
 
         <section>
           <div>
-            <h2>Atelier Live Orders</h2>
+            <h2>Admin Live Orders</h2>
             <div>
               <input
                 type='text'
