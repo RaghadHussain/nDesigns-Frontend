@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { getAllProducts } from "../../services/productService";
 import { getAllCategories } from "../../services/categoryService";
 import { getVariantByProduct } from "../../services/productVariantService";
@@ -11,12 +11,13 @@ const PRODUCTS_PER_PAGE = 9;
 
 function ProductsPage() {
     useDocumentTitle("Shop");
+    const [searchParams] = useSearchParams();
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "");
     const [selectedSizes, setSelectedSizes] = useState([]);
     const [maxPrice, setMaxPrice] = useState(null);
     const [sortBy, setSortBy] = useState("newest");
