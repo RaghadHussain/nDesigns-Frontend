@@ -92,7 +92,7 @@ function CartPage() {
 
     return (
         <div>
-            <h1>Your Shopping Atelier</h1>
+            <h1>Your Shopping Cart</h1>
 
             {cartItems.length === 0 ? (
                 <div>
@@ -163,7 +163,7 @@ function CartPage() {
                     <section>
                         <h2>Order Summary</h2>
                         <div>
-                            <span>Atelier Subtotal</span>
+                            <span>Cart Subtotal</span>
                             <span>BHD {subtotal.toFixed(2)}</span>
                         </div>
                         <div>

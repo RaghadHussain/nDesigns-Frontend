@@ -5,7 +5,7 @@ function AdminSidebar() {
         <aside>
             <div>
                 <strong>ndesign</strong>
-                <p>Atelier Management</p>
+                <p>Admin Management</p>
             </div>
             <nav>
                 <Link to="/admin">Dashboard</Link>
