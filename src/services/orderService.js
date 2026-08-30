@@ -18,6 +18,24 @@ async function getAllOrders(){
     }
 }
 
+async function getDashboardStats(){
+    try{
+        const response = await api.get(`/orders/admin/stats`);
+        return response.data;
+    }catch(err){
+        throw new Error (err.response?.data?.message || err.message);
+    }
+}
+
+async function getRecentOrders(){
+    try{
+        const response = await api.get(`/orders/admin/recent`);
+        return response.data;
+    }catch(err){
+        throw new Error (err.response?.data?.message || err.message);
+    }
+}
+
 async function getOrderById(id){
     try{
         const response = await api.get(`/orders/${id}`);
@@ -48,6 +66,8 @@ async function cancelOrder(id){
 export {
     getMyOrders,
     getAllOrders,
+    getDashboardStats,
+    getRecentOrders,
     getOrderById,
     updateOrderStatus,
     cancelOrder
