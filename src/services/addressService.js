@@ -28,18 +28,8 @@ async function updateAddress(id, body){
     }
 }
 
-async function deleteAddress(id){
-    try{
-        const response = await api.delete(`/address/${id}`);
-        return response.data;
-    }catch(err){
-        throw new Error (err.response?.data?.message || err.message);
-    }
-}
-
 export {
   createAddress,
   getUserAddress,
-  updateAddress,
-  deleteAddress
+  updateAddress
 };
