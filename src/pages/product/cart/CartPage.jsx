@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
-import { getCart } from '../../../services/cartService'
+import { getCart, deleteCart } from '../../../services/cartService'
 import { updateCartItem, deleteCartItem } from '../../../services/cartItemService'
 import { getProductById } from '../../../services/productService'
 import getImageUrl from '../../../utils/imageUrl'
@@ -63,6 +63,18 @@ function CartPage() {
         }
     }
 
+    async function clearCart() {
+        const previousItems = cartItems;
+        setCartItems([]);
+
+        try {
+            await deleteCart();
+        } catch (err) {
+            setCartItems(previousItems);
+            setError(err.message);
+        }
+    }
+
     async function removeItem(itemId) {
         const previousItems = cartItems;
         setCartItems(cartItems.filter((cartItem) => cartItem._id !== itemId));
@@ -103,6 +115,7 @@ function CartPage() {
                 <div>
                     <section>
                         <h2>Product Details</h2>
+                        <button type="button" onClick={clearCart}>Clear Cart</button>
                         <table>
                             <thead>
                                 <tr>
