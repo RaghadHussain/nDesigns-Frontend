@@ -5,6 +5,7 @@ import { getCart } from '../../services/cartService';
 import { getUserAddress } from '../../services/addressService';
 import { applyDiscount } from '../../services/discountService';
 import { checkout } from '../../services/checkoutService';
+import { getDeliveryFee } from '../../services/deliverySettingsService';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const CheckoutPage = ({}) => {
@@ -12,23 +13,33 @@ const CheckoutPage = ({}) => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [address, setAddress] = useState(null);
+  const [deliveryFee, setDeliveryFee] = useState(0);
   const [error, setError] = useState('');
   const [discountMessage, setDiscountMessage] = useState('');
   const [formData, setFormData] = useState({
     paymentMethod: 'cash',
     discountCode: '',
     pointsToRedeem: '',
-    deliveryFee: '0',
   });
 
   useEffect(() => {
     async function fetchCheckoutData(){
       try {
-        const cartData = await getCart();
+        const [cartData, feeData] = await Promise.all([
+          getCart(),
+          getDeliveryFee(),
+        ]);
         setCartItems(cartData.items);
+        setDeliveryFee(feeData.fee);
 
-        const addressData = await getUserAddress();
-        setAddress(addressData);
+        try {
+          const addressData = await getUserAddress();
+          setAddress(addressData);
+        } catch (err) {
+          if (err.message !== 'No Address Found') {
+            throw err;
+          }
+        }
       } catch (err) {
         console.log(`Error: ${err}`)
         setError(err.message);
@@ -59,7 +70,6 @@ const CheckoutPage = ({}) => {
         paymentMethod: formData.paymentMethod,
         discountCode: formData.discountCode || undefined,
         pointsToRedeem: formData.pointsToRedeem ? Number(formData.pointsToRedeem) : undefined,
-        deliveryFee: Number(formData.deliveryFee),
       });
       navigate(`/checkout/confirmation/${order._id}`);
     } catch (err) {
@@ -82,6 +92,7 @@ const CheckoutPage = ({}) => {
         ))}
       </ul>
       <p>Subtotal: {subTotal}</p>
+      <p>Delivery Fee: BHD {deliveryFee}</p>
 
       <h2>Address</h2>
       {address
@@ -115,17 +126,6 @@ const CheckoutPage = ({}) => {
             id='pointsToRedeem'
             value={formData.pointsToRedeem}
             name='pointsToRedeem'
-            onChange={handleChange}
-            min='0'
-          />
-        </div>
-        <div>
-          <label htmlFor='deliveryFee'>Delivery Fee:</label>
-          <input
-            type='number'
-            id='deliveryFee'
-            value={formData.deliveryFee}
-            name='deliveryFee'
             onChange={handleChange}
             min='0'
           />

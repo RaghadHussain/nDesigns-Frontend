@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router'
 import { getCart, deleteCart } from '../../../services/cartService'
 import { updateCartItem, deleteCartItem } from '../../../services/cartItemService'
 import { getProductById } from '../../../services/productService'
+import { getDeliveryFee } from '../../../services/deliverySettingsService'
 import getImageUrl from '../../../utils/imageUrl'
 import useDocumentTitle from '../../../hooks/useDocumentTitle'
-
-const DELIVERY_FEE = 2
 
 function CartPage() {
     useDocumentTitle("Cart")
     const [cartItems, setCartItems] = useState([])
+    const [deliveryFeeSetting, setDeliveryFeeSetting] = useState(0)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
     const navigate = useNavigate()
@@ -20,7 +20,11 @@ function CartPage() {
             setLoading(true);
             setError("");
 
-            const { items } = await getCart();
+            const [{ items }, feeData] = await Promise.all([
+                getCart(),
+                getDeliveryFee(),
+            ]);
+            setDeliveryFeeSetting(feeData.fee);
 
             const itemsWithProducts = await Promise.all(
                 items.map(async (item) => {
@@ -99,7 +103,7 @@ function CartPage() {
         (sum, item) => sum + item.variant.price * item.quantity,
         0
     );
-    const deliveryFee = cartItems.length > 0 ? DELIVERY_FEE : 0;
+    const deliveryFee = cartItems.length > 0 ? deliveryFeeSetting : 0;
     const grandTotal = subtotal + deliveryFee;
 
     return (
