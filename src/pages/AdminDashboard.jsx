@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 
 import { useAuth } from '../context/AuthContext';
 import { getDashboardStats, getRecentOrders, getOrderStatuses } from '../services/orderService';
@@ -115,7 +116,7 @@ const AdminDashboard = () => {
                   <td>BHD {order.totalCost.toFixed(2)}</td>
                   <td>{order.status}</td>
                   <td>
-                    <button type='button'>Edit</button>
+                    <Link to={`/admin/orders/${order._id}`}>Edit</Link>
                   </td>
                 </tr>
               ))}

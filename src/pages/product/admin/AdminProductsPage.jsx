@@ -35,6 +35,7 @@ const AdminProductsPage = ({}) => {
               <th>Name</th>
               <th>Category</th>
               <th>Created</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -43,6 +44,7 @@ const AdminProductsPage = ({}) => {
                 <td>{product.name}</td>
                 <td>{product.category?.name || '—'}</td>
                 <td>{new Date(product.createdAt).toLocaleDateString()}</td>
+                <td><Link to={`/admin/products/${product._id}`}>Edit</Link></td>
               </tr>
             ))}
           </tbody>
