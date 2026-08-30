@@ -3,8 +3,10 @@ import { useNavigate, useParams } from 'react-router';
 
 import { getCategoryById, updateCategory } from '../../../services/categoryService';
 import AdminSidebar from '../../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../../hooks/useDocumentTitle';
 
 const EditCategoryPage = ({}) => {
+  useDocumentTitle("Edit Category")
   const { id } = useParams();
   const navigate = useNavigate();
   const [category, setCategory] = useState(null);

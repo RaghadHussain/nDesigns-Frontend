@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 
 import { getAllCategories } from '../../../services/categoryService';
 import AdminSidebar from '../../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../../hooks/useDocumentTitle';
 
 const AdminCategoriesPage = ({}) => {
+  useDocumentTitle("Categories")
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState('');
 

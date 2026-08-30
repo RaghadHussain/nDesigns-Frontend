@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router';
 
 import { createCategory, getAllCategories } from '../../../services/categoryService';
 import AdminSidebar from '../../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../../hooks/useDocumentTitle';
 
 const CreateCategoryPage = ({}) => {
+  useDocumentTitle("Create Category")
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [categories, setCategories] = useState([]);

@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 
 import { getAllProducts } from '../../../services/productService';
 import AdminSidebar from '../../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../../hooks/useDocumentTitle';
 
 const AdminProductsPage = ({}) => {
+  useDocumentTitle("Products")
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
 

@@ -5,8 +5,10 @@ import { createProduct } from '../../../services/productService';
 import { createVariant } from '../../../services/productVariantService';
 import { getAllCategories } from '../../../services/categoryService';
 import AdminSidebar from '../../../components/admin/AdminSidebar';
+import useDocumentTitle from '../../../hooks/useDocumentTitle';
 
 const CreateProductPage = ({}) => {
+  useDocumentTitle("Create Product")
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
