@@ -21,6 +21,9 @@ import AdminOrdersPage from "./pages/order/AdminOrdersPage";
 import EditOrderPage from "./pages/order/EditOrderPage";
 import AdminProductsPage from "./pages/product/admin/AdminProductsPage";
 import CreateProductPage from "./pages/product/admin/CreateProductPage";
+import AdminCategoriesPage from "./pages/category/admin/AdminCategoriesPage";
+import CreateCategoryPage from "./pages/category/admin/CreateCategoryPage";
+import EditCategoryPage from "./pages/category/admin/EditCategoryPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
 import OrderConfirmationPage from "./pages/checkout/OrderConfirmationPage";
 import ProfilePage from "./pages/account/ProfilePage";
@@ -55,6 +58,9 @@ function App() {
         <Route path="/admin/orders/:id" element={<AdminRoute><EditOrderPage /></AdminRoute>} />
         <Route path="/admin/products" element={<AdminRoute><AdminProductsPage /></AdminRoute>} />
         <Route path="/admin/products/new" element={<AdminRoute><CreateProductPage /></AdminRoute>} />
+        <Route path="/admin/categories" element={<AdminRoute><AdminCategoriesPage /></AdminRoute>} />
+        <Route path="/admin/categories/new" element={<AdminRoute><CreateCategoryPage /></AdminRoute>} />
+        <Route path="/admin/categories/:id" element={<AdminRoute><EditCategoryPage /></AdminRoute>} />
         <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
         <Route path="/checkout/confirmation/:id" element={<ProtectedRoute><OrderConfirmationPage /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage/></ProtectedRoute>}/>
