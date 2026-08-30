@@ -74,13 +74,13 @@ function ProductsPage() {
 
     const productCountByCategory = {};
     for (const product of products) {
-        productCountByCategory[product.category] =
-            (productCountByCategory[product.category] || 0) + 1;
+        productCountByCategory[product.category._id] =
+            (productCountByCategory[product.category._id] || 0) + 1;
     }
 
     // Apply the sidebar filters.
     let visibleProducts = products.filter((product) => {
-        if (selectedCategory && product.category !== selectedCategory) {
+        if (selectedCategory && product.category._id !== selectedCategory) {
             return false;
         }
         if (

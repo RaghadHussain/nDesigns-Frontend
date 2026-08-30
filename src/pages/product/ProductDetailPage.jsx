@@ -53,7 +53,7 @@ function ProductDetailPage() {
             setCategory(categoryData);
 
             const relatedProductsRaw = allProducts
-                .filter((product) => product.category === productData.category && product._id !== productData._id)
+                .filter((product) => product.category._id === productData.category && product._id !== productData._id)
                 .slice(0, 4);
 
             const relatedProducts = await Promise.all(
