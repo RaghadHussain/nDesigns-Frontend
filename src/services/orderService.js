@@ -36,6 +36,15 @@ async function getRecentOrders(){
     }
 }
 
+async function getOrderStatuses(){
+    try{
+        const response = await api.get(`/orders/statuses`);
+        return response.data;
+    }catch(err){
+        throw new Error (err.response?.data?.message || err.message);
+    }
+}
+
 async function getOrderById(id){
     try{
         const response = await api.get(`/orders/${id}`);
@@ -68,6 +77,7 @@ export {
     getAllOrders,
     getDashboardStats,
     getRecentOrders,
+    getOrderStatuses,
     getOrderById,
     updateOrderStatus,
     cancelOrder

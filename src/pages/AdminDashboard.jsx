@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { useAuth } from '../context/AuthContext';
-import { getDashboardStats, getRecentOrders } from '../services/orderService';
+import { getDashboardStats, getRecentOrders, getOrderStatuses } from '../services/orderService';
 import AdminSidebar from '../components/admin/AdminSidebar';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
@@ -9,6 +9,8 @@ const AdminDashboard = () => {
   useDocumentTitle("Admin Dashboard")
   const { user } = useAuth();
   const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [statuses, setStatuses] = useState([]);
   const [stats, setStats] = useState(null);
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState('');
@@ -16,12 +18,14 @@ const AdminDashboard = () => {
   useEffect(() => {
     async function fetchDashboard(){
       try {
-        const [statsData, ordersData] = await Promise.all([
+        const [statsData, ordersData, statusesData] = await Promise.all([
           getDashboardStats(),
           getRecentOrders(),
+          getOrderStatuses(),
         ]);
         setStats(statsData);
         setOrders(ordersData);
+        setStatuses(statusesData);
       } catch (err) {
         console.log(`Error: ${err}`)
         setError(err.message);
@@ -37,10 +41,13 @@ const AdminDashboard = () => {
     { label: 'Active Customers', value: stats ? `${stats.activeCustomers} members` : '...' },
   ];
 
-  const filteredOrders = orders.filter((order) =>
-    order._id.toLowerCase().includes(search.toLowerCase()) ||
-    order.client.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredOrders = orders.filter((order) => {
+    const matchesSearch =
+      order._id.toLowerCase().includes(search.toLowerCase()) ||
+      order.client.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus = !statusFilter || order.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   return (
     <div>
@@ -77,7 +84,12 @@ const AdminDashboard = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <button type='button'>Filter Status</button>
+              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+                <option value=''>All Statuses</option>
+                {statuses.map((status) => (
+                  <option key={status} value={status}>{status}</option>
+                ))}
+              </select>
             </div>
           </div>
 
