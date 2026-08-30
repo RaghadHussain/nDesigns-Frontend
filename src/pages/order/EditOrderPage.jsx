@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
-import { getOrderById, updateOrderStatus } from '../../services/orderService';
+import { getOrderById, updateOrderStatus, getOrderStatuses } from '../../services/orderService';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
-
-const ORDER_STATUSES = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
 
 const EditOrderPage = ({}) => {
   useDocumentTitle("Edit Order")
@@ -14,15 +12,20 @@ const EditOrderPage = ({}) => {
   const [order, setOrder] = useState(null);
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState('');
+  const [statuses, setStatuses] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
     async function fetchOrder(){
       try {
-        const data = await getOrderById(id);
+        const [data, statusesData] = await Promise.all([
+          getOrderById(id),
+          getOrderStatuses(),
+        ]);
         setOrder(data.order);
         setItems(data.items);
         setStatus(data.order.orderStatus);
+        setStatuses(statusesData);
       } catch (err) {
         console.log(`Error: ${err}`)
         setError(err.message);
@@ -77,7 +80,7 @@ const EditOrderPage = ({}) => {
           <div>
             <label htmlFor='status'>Status:</label>
             <select id='status' name='status' value={status} onChange={handleChange}>
-              {ORDER_STATUSES.map((option) => (
+              {statuses.map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
