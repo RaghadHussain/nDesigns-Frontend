@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 
-import { getAllProducts } from '../../../services/productService';
+import { getAllProducts, deleteProduct } from '../../../services/productService';
 import AdminSidebar from '../../../components/admin/AdminSidebar';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
 
@@ -21,6 +21,15 @@ const AdminProductsPage = ({}) => {
     }
     fetchProducts();
   }, []);
+
+  async function handleDelete(id) {
+    try {
+      await deleteProduct(id);
+      setProducts(products.filter((product) => product._id !== id));
+    } catch (err) {
+      setError(err.message);
+    }
+  }
 
   return (
     <div>
@@ -44,7 +53,10 @@ const AdminProductsPage = ({}) => {
                 <td>{product.name}</td>
                 <td>{product.category?.name || '—'}</td>
                 <td>{new Date(product.createdAt).toLocaleDateString()}</td>
-                <td><Link to={`/admin/products/${product._id}`}>Edit</Link></td>
+                <td>
+                  <Link to={`/admin/products/${product._id}`}>Edit</Link>
+                  <button type='button' onClick={() => handleDelete(product._id)}>Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
