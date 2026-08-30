@@ -34,7 +34,7 @@ const SignInForm = ({}) => {
       const signedInUser = await signIn(formData);
 
       setUser(signedInUser);
-      navigate('/dashboard');
+      navigate(signedInUser.role === 'admin' ? '/admin' : '/');
     } catch (err) {
       console.log(`Error: ${err}`)
       setError(err?.response?.data?.message);

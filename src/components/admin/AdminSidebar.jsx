@@ -1,6 +1,9 @@
 import { Link } from 'react-router'
+import { useAuth } from '../../context/AuthContext'
 
 function AdminSidebar() {
+    const { logout } = useAuth()
+
     return (
         <aside>
             <div>
@@ -13,6 +16,7 @@ function AdminSidebar() {
                 <Link to="/admin/products">Products</Link>
                 <Link to="/admin/categories">Categories</Link>
                 <Link to="/admin/discounts">Discounts</Link>
+                <button type="button" onClick={logout}>Sign Out</button>
             </nav>
         </aside>
     )
