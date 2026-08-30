@@ -53,7 +53,10 @@ const EditOrderPage = ({}) => {
     return (
       <div>
         <AdminSidebar />
-        <main><p>Loading...</p></main>
+        <main>
+          <p className='error'>{error}</p>
+          {!error && <p>Loading...</p>}
+        </main>
       </div>
     );
   }
