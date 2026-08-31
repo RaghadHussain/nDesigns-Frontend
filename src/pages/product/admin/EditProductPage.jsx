@@ -180,9 +180,11 @@ const EditProductPage = ({}) => {
               required
             >
               <option value=''>Select a category</option>
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>{category.name}</option>
-              ))}
+              {categories
+                .filter((category) => category.parentCategory)
+                .map((category) => (
+                  <option key={category._id} value={category._id}>{category.name}</option>
+                ))}
             </select>
           </div>
 
