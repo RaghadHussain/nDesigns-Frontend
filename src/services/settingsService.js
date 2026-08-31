@@ -1,17 +1,17 @@
 import api from './api'
 
-async function getLoyaltySetting(){
+async function getSettings(){
     try{
-        const response = await api.get(`/points`);
+        const response = await api.get(`/settings`);
         return response.data;
     }catch(err){
         throw new Error (err.response?.data?.message || err.message);
     }
 }
 
-async function createLoyaltySetting(pointsPerBHD){
+async function createSettings(deliveryFee, pointsPerBHD){
     try{
-        const response = await api.post(`/points`, { pointsPerBHD });
+        const response = await api.post(`/settings`, { deliveryFee, pointsPerBHD });
         return response.data;
     }catch(err){
         throw new Error (err.response?.data?.message || err.message);
@@ -19,6 +19,6 @@ async function createLoyaltySetting(pointsPerBHD){
 }
 
 export {
-    getLoyaltySetting,
-    createLoyaltySetting
+    getSettings,
+    createSettings
 }

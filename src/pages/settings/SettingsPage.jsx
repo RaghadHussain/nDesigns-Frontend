@@ -1,29 +1,29 @@
 import { useState, useEffect } from 'react';
 
-import { getLoyaltySetting, createLoyaltySetting } from '../../services/loyaltySettingsService';
+import { getSettings, createSettings } from '../../services/settingsService';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
-const LoyaltySettingsPage = ({}) => {
-  useDocumentTitle('Loyalty Settings');
-  const [pointsPerBHD, setPointsPerBHD] = useState('');
+const SettingsPage = ({}) => {
+  useDocumentTitle('Settings');
+  const [formData, setFormData] = useState({ deliveryFee: '', pointsPerBHD: '' });
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    async function fetchSetting() {
+    async function fetchSettings() {
       try {
-        const data = await getLoyaltySetting();
-        setPointsPerBHD(data.pointsPerBHD);
+        const data = await getSettings();
+        setFormData({ deliveryFee: data.deliveryFee, pointsPerBHD: data.pointsPerBHD });
       } catch (err) {
         setError(err.message);
       }
     }
-    fetchSetting();
+    fetchSettings();
   }, []);
 
   function handleChange(event) {
-    setPointsPerBHD(event.target.value);
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
   async function handleSubmit(event) {
@@ -31,9 +31,9 @@ const LoyaltySettingsPage = ({}) => {
     setError('');
     setMessage('');
     try {
-      const data = await createLoyaltySetting(Number(pointsPerBHD));
-      setPointsPerBHD(data.pointsPerBHD);
-      setMessage('Loyalty rate updated.');
+      const data = await createSettings(Number(formData.deliveryFee), Number(formData.pointsPerBHD));
+      setFormData({ deliveryFee: data.deliveryFee, pointsPerBHD: data.pointsPerBHD });
+      setMessage('Settings updated.');
     } catch (err) {
       setError(err.message);
     }
@@ -43,16 +43,29 @@ const LoyaltySettingsPage = ({}) => {
     <div>
       <AdminSidebar />
       <main>
-        <h1>Loyalty Settings</h1>
+        <h1>Settings</h1>
         <p className='error'>{error}</p>
         <p>{message}</p>
         <form autoComplete='off' onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor='deliveryFee'>Delivery Fee (BHD):</label>
+            <input
+              type='number'
+              id='deliveryFee'
+              value={formData.deliveryFee}
+              name='deliveryFee'
+              onChange={handleChange}
+              min='0'
+              step='0.01'
+              required
+            />
+          </div>
           <div>
             <label htmlFor='pointsPerBHD'>Points Earned per BHD Spent:</label>
             <input
               type='number'
               id='pointsPerBHD'
-              value={pointsPerBHD}
+              value={formData.pointsPerBHD}
               name='pointsPerBHD'
               onChange={handleChange}
               min='0'
@@ -69,4 +82,4 @@ const LoyaltySettingsPage = ({}) => {
   );
 };
 
-export default LoyaltySettingsPage;
+export default SettingsPage;
