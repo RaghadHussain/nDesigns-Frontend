@@ -108,6 +108,12 @@ function ProductDetailPage() {
         fetchProductDetails();
     }, [id, user])
 
+    useEffect(() => {
+        if (!cartStatus) return;
+        const timeoutId = setTimeout(() => setCartStatus(""), 3000);
+        return () => clearTimeout(timeoutId);
+    }, [cartStatus])
+
     if (error) {
         return <p>{error}</p>
     }
