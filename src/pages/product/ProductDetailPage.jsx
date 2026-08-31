@@ -186,7 +186,11 @@ function ProductDetailPage() {
                                         setQuantity(1);
                                     }}
                                 >
-                                    {variant.size} {isOutOfStock ? "(Out of Stock)" : `(${variant.quantity} left)`}
+                                    {variant.size} {isOutOfStock
+                                        ? "(Out of Stock)"
+                                        : variant.quantity <= 3
+                                        ? `(Only ${variant.quantity} left)`
+                                        : ""}
                                 </button>
                             );
                         })}

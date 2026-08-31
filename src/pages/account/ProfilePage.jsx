@@ -179,6 +179,7 @@ function ProfilePage() {
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
             <p>Phone Number: {user.phoneNumber}</p>
+            <p>Loyalty Points: {user.loyaltyPoints}</p>
             <button onClick={startEditUser}>Edit</button>
           </div>
         )}
