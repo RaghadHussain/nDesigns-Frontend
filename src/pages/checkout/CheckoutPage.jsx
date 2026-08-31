@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 
 import { useAuth } from '../../context/AuthContext';
 import { getCart } from '../../services/cartService';
@@ -102,7 +102,7 @@ const CheckoutPage = ({}) => {
       <h2>Address</h2>
       {address
         ? <p>{address.city}, Block {address.block}, Road {address.road}, Building {address.building}</p>
-        : <p>No address found. <a href='/account/address'>Add one</a>.</p>}
+        : <p>No address found. <Link to='/account/profile'>Add one</Link>.</p>}
 
       <form onSubmit={handleSubmit}>
         <div>
