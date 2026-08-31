@@ -6,7 +6,7 @@ import { getAllProducts } from '../../../services/productService';
 import AdminSidebar from '../../../components/admin/AdminSidebar';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
 
-const AdminCategoriesPage = ({}) => {
+const AdminCategoriesPage = () => {
   useDocumentTitle("Categories")
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
