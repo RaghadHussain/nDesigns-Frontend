@@ -25,8 +25,7 @@ import EditProductPage from "./pages/product/admin/EditProductPage";
 import AdminCategoriesPage from "./pages/category/admin/AdminCategoriesPage";
 import CreateCategoryPage from "./pages/category/admin/CreateCategoryPage";
 import EditCategoryPage from "./pages/category/admin/EditCategoryPage";
-import DeliverySettingsPage from "./pages/settings/DeliverySettingsPage";
-import LoyaltySettingsPage from "./pages/settings/LoyaltySettingsPage";
+import SettingsPage from "./pages/settings/SettingsPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
 import OrderConfirmationPage from "./pages/checkout/OrderConfirmationPage";
 import ProfilePage from "./pages/account/ProfilePage";
@@ -65,8 +64,7 @@ function App() {
         <Route path="/admin/categories" element={<AdminRoute><AdminCategoriesPage /></AdminRoute>} />
         <Route path="/admin/categories/new" element={<AdminRoute><CreateCategoryPage /></AdminRoute>} />
         <Route path="/admin/categories/:id" element={<AdminRoute><EditCategoryPage /></AdminRoute>} />
-        <Route path="/admin/delivery-settings" element={<AdminRoute><DeliverySettingsPage /></AdminRoute>} />
-        <Route path="/admin/loyalty-settings" element={<AdminRoute><LoyaltySettingsPage /></AdminRoute>} />
+        <Route path="/admin/settings" element={<AdminRoute><SettingsPage /></AdminRoute>} />
         <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
         <Route path="/checkout/confirmation/:id" element={<ProtectedRoute><OrderConfirmationPage /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage/></ProtectedRoute>}/>

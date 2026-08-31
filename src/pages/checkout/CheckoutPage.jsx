@@ -6,7 +6,7 @@ import { getCart } from '../../services/cartService';
 import { getUserAddress } from '../../services/addressService';
 import { applyDiscount } from '../../services/discountService';
 import { checkout } from '../../services/checkoutService';
-import { getDeliveryFee } from '../../services/deliverySettingsService';
+import { getSettings } from '../../services/settingsService';
 import { getCurrentUser } from '../../services/authService';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
@@ -28,12 +28,12 @@ const CheckoutPage = ({}) => {
   useEffect(() => {
     async function fetchCheckoutData(){
       try {
-        const [cartData, feeData] = await Promise.all([
+        const [cartData, settingsData] = await Promise.all([
           getCart(),
-          getDeliveryFee(),
+          getSettings(),
         ]);
         setCartItems(cartData.items);
-        setDeliveryFee(feeData.fee);
+        setDeliveryFee(settingsData.deliveryFee);
 
         try {
           const addressData = await getUserAddress();
