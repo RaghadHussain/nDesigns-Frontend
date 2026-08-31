@@ -17,6 +17,7 @@ function AdminSidebar() {
                 <Link to="/admin/categories">Categories</Link>
                 <Link to="/admin/discounts">Discounts</Link>
                 <Link to="/admin/delivery-settings">Delivery Settings</Link>
+                <Link to="/admin/loyalty-settings">Loyalty Settings</Link>
                 <button type="button" onClick={logout}>Sign Out</button>
             </nav>
         </aside>

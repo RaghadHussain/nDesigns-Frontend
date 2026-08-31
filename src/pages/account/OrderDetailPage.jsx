@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router'
 
 import { getOrderById, cancelOrder } from '../../services/orderService'
+import { getCurrentUser } from '../../services/authService'
+import { useAuth } from '../../context/AuthContext'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const CANCELLABLE_STATUSES = ['pending', 'confirmed']
@@ -9,6 +11,7 @@ const CANCELLABLE_STATUSES = ['pending', 'confirmed']
 function OrderDetailPage() {
   useDocumentTitle("Order Details")
   const { id } = useParams()
+  const { setUser } = useAuth()
   const [order, setOrder] = useState(null)
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
@@ -34,6 +37,9 @@ function OrderDetailPage() {
     try {
       const updatedOrder = await cancelOrder(id)
       setOrder(updatedOrder)
+
+      const updatedUser = await getCurrentUser()
+      setUser(updatedUser)
     } catch (err) {
       setError(err.message)
     }

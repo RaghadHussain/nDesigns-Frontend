@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
+import { useAuth } from '../../context/AuthContext';
 import { getCart } from '../../services/cartService';
 import { getUserAddress } from '../../services/addressService';
 import { applyDiscount } from '../../services/discountService';
 import { checkout } from '../../services/checkoutService';
 import { getDeliveryFee } from '../../services/deliverySettingsService';
+import { getCurrentUser } from '../../services/authService';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const CheckoutPage = ({}) => {
   useDocumentTitle("Checkout")
   const navigate = useNavigate();
+  const { user, setUser } = useAuth();
   const [cartItems, setCartItems] = useState([]);
   const [address, setAddress] = useState(null);
   const [deliveryFee, setDeliveryFee] = useState(0);
@@ -71,6 +74,8 @@ const CheckoutPage = ({}) => {
         discountCode: formData.discountCode || undefined,
         pointsToRedeem: formData.pointsToRedeem ? Number(formData.pointsToRedeem) : undefined,
       });
+      const updatedUser = await getCurrentUser();
+      setUser(updatedUser);
       navigate(`/checkout/confirmation/${order._id}`);
     } catch (err) {
       console.log(`Error: ${err}`)
@@ -121,6 +126,7 @@ const CheckoutPage = ({}) => {
         </div>
         <div>
           <label htmlFor='pointsToRedeem'>Points to Redeem:</label>
+          <p>Available Points: {user.loyaltyPoints}</p>
           <input
             type='number'
             id='pointsToRedeem'
@@ -128,6 +134,7 @@ const CheckoutPage = ({}) => {
             name='pointsToRedeem'
             onChange={handleChange}
             min='0'
+            max={user.loyaltyPoints}
           />
         </div>
         <div>
