@@ -22,6 +22,12 @@ const SettingsPage = ({}) => {
     fetchSettings();
   }, []);
 
+  useEffect(() => {
+    if (!message) return;
+    const timeoutId = setTimeout(() => setMessage(''), 3000);
+    return () => clearTimeout(timeoutId);
+  }, [message]);
+
   function handleChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
