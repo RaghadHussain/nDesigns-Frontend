@@ -31,6 +31,7 @@ import OrderConfirmationPage from "./pages/checkout/OrderConfirmationPage";
 import ProfilePage from "./pages/account/ProfilePage";
 import OrderHistoryPage from "./pages/account/OrderHistoryPage";
 import OrderDetailPage from "./pages/account/OrderDetailPage";
+import About from "./pages/about/About";
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -68,6 +69,8 @@ function App() {
         <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
         <Route path="/checkout/confirmation/:id" element={<ProtectedRoute><OrderConfirmationPage /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage/></ProtectedRoute>}/>
+        <Route path="/about" element={<ProtectedRoute><About/></ProtectedRoute>}/>
+
       </Routes>
       {showFooter && <Footer />}
     </div>

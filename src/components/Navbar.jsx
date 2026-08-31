@@ -8,6 +8,7 @@ function Navbar() {
     <nav>
       <Link to='/'>Home</Link>
       <Link to='/products'>Shop</Link>
+      <Link to='/about'>About</Link>
       <Search />
       {user
       ? (<>
