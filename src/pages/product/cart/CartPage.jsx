@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router'
 import { getCart, deleteCart } from '../../../services/cartService'
 import { updateCartItem, deleteCartItem } from '../../../services/cartItemService'
 import { getProductById } from '../../../services/productService'
-import { getDeliveryFee } from '../../../services/deliverySettingsService'
+import { getSettings } from '../../../services/settingsService'
 import getImageUrl from '../../../utils/imageUrl'
 import useDocumentTitle from '../../../hooks/useDocumentTitle'
 
@@ -20,11 +20,11 @@ function CartPage() {
             setLoading(true);
             setError("");
 
-            const [{ items }, feeData] = await Promise.all([
+            const [{ items }, settingsData] = await Promise.all([
                 getCart(),
-                getDeliveryFee(),
+                getSettings(),
             ]);
-            setDeliveryFeeSetting(feeData.fee);
+            setDeliveryFeeSetting(settingsData.deliveryFee);
 
             const itemsWithProducts = await Promise.all(
                 items.map(async (item) => {
