@@ -24,6 +24,8 @@ const CheckoutPage = ({}) => {
     discountCode: '',
     pointsToRedeem: '',
   });
+  const [ submitting, setSubmitting ] = useState(false)
+
 
   useEffect(() => {
     async function fetchCheckoutData(){
@@ -68,6 +70,7 @@ const CheckoutPage = ({}) => {
   async function handleSubmit(event){
     event.preventDefault();
     try {
+      setSubmitting(true)
       const order = await checkout({
         addressId: address._id,
         paymentMethod: formData.paymentMethod,
@@ -80,6 +83,7 @@ const CheckoutPage = ({}) => {
     } catch (err) {
       console.log(`Error: ${err}`)
       setError(err.message);
+      setSubmitting(false)
     }
   };
 
@@ -137,7 +141,7 @@ const CheckoutPage = ({}) => {
             </div>
           </section>
 
-          <button disabled={!address || cartItems.length === 0} className='btn btn--block checkout-submit'>Place Order</button>
+          <button disabled={!address || cartItems.length === 0 || submitting} className='btn btn--block checkout-submit'>{submitting ? 'Placing Order...' : 'Place Order'}</button>
         </form>
 
         <aside className='checkout-summary'>
