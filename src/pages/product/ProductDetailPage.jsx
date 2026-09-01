@@ -211,7 +211,7 @@ function ProductDetailPage() {
 
                     {hasNoStock ? (
                         <p className='error'>This product is currently out of stock.</p>
-                    ) : (
+                    ) : user?.role !== "admin" && (
                         <div className='product-detail__actions'>
                             <div className='stepper'>
                                 <button type="button" onClick={decreaseQuantity} disabled={quantity <= 1}>
