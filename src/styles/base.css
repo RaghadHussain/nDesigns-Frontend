@@ -23,7 +23,7 @@
   --nd-white: #ffffff;
 
   /* Semantic tokens */
-  --nd-bg: var(--nd-white);
+  --nd-bg: #fcfcf3;
   --nd-text: var(--nd-green);
   --nd-text-muted: #5c6b58;
   --nd-text-on-dark: #f2f3ea;
@@ -241,6 +241,7 @@ fieldset { border: none; margin: 0; padding: 0; }
   gap: 0.9em;
   margin-top: 1.5em;
 }
+.form-actions--center { justify-content: center; }
 
 /* ---------- Quantity stepper ---------- */
 .stepper {

@@ -125,7 +125,7 @@ function ProfilePage() {
   }
 
   return (
-    <main className='account-page container'>
+    <main className='account-page account-page--profile container'>
       <h1>My Profile</h1>
 
       <p className='account-back'><Link to='/account/orders'>View Order History</Link></p>
@@ -171,7 +171,7 @@ function ProfilePage() {
             </div>
             <div className='form-actions'>
               <button type='submit' className='btn'>Save</button>
-              <button type='button' onClick={() => setIsEditingUser(false)} className='btn btn--ghost'>Cancel</button>
+              <button type='button' onClick={() => setIsEditingUser(false)} className='btn btn--outline'>Cancel</button>
             </div>
           </form>
         ) : (
@@ -257,7 +257,7 @@ function ProfilePage() {
             </div>
             <div className='form-actions'>
               <button type='submit' className='btn'>Save</button>
-              <button type='button' onClick={() => setIsEditingAddress(false)} className='btn btn--ghost'>Cancel</button>
+              <button type='button' onClick={() => setIsEditingAddress(false)} className='btn btn--outline'>Cancel</button>
             </div>
           </form>
         ) : address ? (
@@ -270,12 +270,12 @@ function ProfilePage() {
               <p>Apartment: <span>{address.apartment}</span></p>
             )}
             {address.note && <p>Note: <span>{address.note}</span></p>}
-            <button onClick={startEditAddress} className='btn btn--outline btn--sm'>Edit</button>
+            <button onClick={startEditAddress} className='btn btn--sm'>Edit</button>
           </div>
         ) : (
           <div className='account-detail-list'>
             <p>No address yet</p>
-            <button onClick={startEditAddress} className='btn btn--outline btn--sm'>Add Address</button>
+            <button onClick={startEditAddress} className='btn btn--sm'>Add Address</button>
           </div>
         )}
       </section>

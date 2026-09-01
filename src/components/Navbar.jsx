@@ -13,6 +13,7 @@ function Navbar() {
           <span className='navbar__brand-name'>ndesign</span>
         </Link>
         <div className='navbar__links'>
+          <Link to='/' className='navbar__link'>Home</Link>
           <Link to='/products' className='navbar__link'>Shop</Link>
           <Link to='/about' className='navbar__link'>About</Link>
         </div>

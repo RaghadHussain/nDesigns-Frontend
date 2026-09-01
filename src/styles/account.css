@@ -4,6 +4,7 @@
    ============================================================ */
 
 .account-page { padding: 2.5rem 0 4rem; max-width: 44rem; }
+.account-page--profile { max-width: 52rem; }
 .account-page h1 { margin-bottom: 0.5rem; }
 .account-back { margin-bottom: 2rem; font-size: 0.88rem; }
 .account-back a { text-decoration: underline; color: var(--nd-text-muted); }

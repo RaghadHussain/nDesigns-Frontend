@@ -101,7 +101,7 @@ const CreateDiscountPage = ({}) => {
               required
             />
           </div>
-          <div className='form-actions'>
+          <div className='form-actions form-actions--center'>
             <button className='btn'>Create Discount</button>
             <button type='button' onClick={() => navigate('/admin/discounts')} className='btn btn--ghost'>Cancel</button>
           </div>
