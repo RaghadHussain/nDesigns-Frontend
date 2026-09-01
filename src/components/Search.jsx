@@ -6,6 +6,7 @@ import getImageUrl from '../utils/imageUrl'
 
 const SUGGESTIONS_LIMIT = 5;
 
+//search
 function Search() {
     const navigate = useNavigate();
     const [query, setQuery] = useState("");
