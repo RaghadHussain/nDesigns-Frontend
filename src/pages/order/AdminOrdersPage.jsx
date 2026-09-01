@@ -24,33 +24,37 @@ const AdminOrdersPage = ({}) => {
   }, []);
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Orders</h1>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Orders</h1>
+        </div>
         <p className='error'>{error}</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Order</th>
-              <th>Status</th>
-              <th>Total</th>
-              <th>Date</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.orderStatus}</td>
-                <td>{order.totalAmount}</td>
-                <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td><Link to={`/admin/orders/${order._id}`}>Edit</Link></td>
+        <div className='admin-table-wrap'>
+          <table className='admin-table'>
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td><span className={`badge badge--${order.orderStatus.toLowerCase()}`}>{order.orderStatus}</span></td>
+                  <td>{order.totalAmount}</td>
+                  <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                  <td><Link to={`/admin/orders/${order._id}`} className='admin-table__action'>Edit</Link></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
   );

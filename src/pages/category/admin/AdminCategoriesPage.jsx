@@ -59,37 +59,43 @@ const AdminCategoriesPage = () => {
   }, {});
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Categories</h1>
-        <Link to='/admin/categories/new'>Create Category</Link>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Categories</h1>
+          <Link to='/admin/categories/new' className='btn btn--sm'>Create Category</Link>
+        </div>
         <p className='error'>{error}</p>
-        <ul>
+        <ul className='category-tree admin-panel'>
           {parentCategories.map((parent) => {
             const isExpanded = expandedParentIds.has(parent._id);
             const subCategories = subCategoriesByParentId[parent._id] || [];
 
             return (
-              <li key={parent._id}>
-                <button type='button' onClick={() => toggleParent(parent._id)}>
-                  {isExpanded ? '▼' : '▶'} {parent.name}
-                </button>
-                <Link to={`/admin/categories/${parent._id}`}>Edit</Link>
+              <li key={parent._id} className='category-tree__item'>
+                <div className='category-tree__row'>
+                  <button type='button' onClick={() => toggleParent(parent._id)} className='category-tree__toggle'>
+                    <span className='category-tree__chevron'>{isExpanded ? '▼' : '▶'}</span> {parent.name}
+                  </button>
+                  <Link to={`/admin/categories/${parent._id}`} className='admin-table__action'>Edit</Link>
+                </div>
 
                 {isExpanded && (
-                  <ul>
-                    {subCategories.length === 0 && <li>No subcategories</li>}
+                  <ul className='category-tree__children'>
+                    {subCategories.length === 0 && <li className='category-tree__empty'>No subcategories</li>}
                     {subCategories.map((sub) => {
                       const subProducts = productsByCategoryId[sub._id] || [];
                       return (
-                        <li key={sub._id}>
-                          <strong>{sub.name}</strong>
-                          <Link to={`/admin/categories/${sub._id}`}>Edit</Link>
-                          <ul>
-                            {subProducts.length === 0 && <li>No products</li>}
+                        <li key={sub._id} className='category-tree__sub-item'>
+                          <div className='category-tree__row'>
+                            <strong>{sub.name}</strong>
+                            <Link to={`/admin/categories/${sub._id}`} className='admin-table__action'>Edit</Link>
+                          </div>
+                          <ul className='category-tree__products'>
+                            {subProducts.length === 0 && <li className='category-tree__empty'>No products</li>}
                             {subProducts.map((product) => (
-                              <li key={product._id}>{product.name}</li>
+                              <li key={product._id} className='category-tree__product-item'>{product.name}</li>
                             ))}
                           </ul>
                         </li>

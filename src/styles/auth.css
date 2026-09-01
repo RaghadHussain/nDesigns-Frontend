@@ -1,0 +1,33 @@
+/* ============================================================
+   Auth — src/pages/SigninPage.jsx, src/pages/SignupPage.jsx
+   ============================================================ */
+
+.auth-page {
+  min-height: calc(100vh - 4.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nd-cream);
+  padding: 3rem 1.25rem;
+}
+.auth-card {
+  width: 100%;
+  max-width: 26rem;
+  background: var(--nd-white);
+  border-radius: var(--nd-radius-lg);
+  box-shadow: var(--nd-shadow-md);
+  padding: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+}
+.auth-card__brand {
+  height: 4.25rem;
+  width: auto;
+  margin: 0 auto 1em;
+}
+.auth-card__subtitle {
+  color: var(--nd-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2em;
+}
+.auth-form { text-align: left; }
+.auth-form .form-actions { flex-direction: column; gap: 0.75em; }

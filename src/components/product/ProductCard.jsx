@@ -5,8 +5,8 @@ function ProductCard({ product }) {
     const firstImage = product.images && product.images[0];
 
     return (
-        <article>
-            <Link to={`/products/${product._id}`}>
+        <article className='product-card'>
+            <Link to={`/products/${product._id}`} className='product-card__image placeholder-image'>
                 {firstImage ? (
                     <img src={getImageUrl(firstImage)} alt={product.name} />
                 ) : (
@@ -14,17 +14,17 @@ function ProductCard({ product }) {
                 )}
             </Link>
 
-            <div>
-                <h3>
+            <div className='product-card__meta'>
+                <h3 className='product-card__title'>
                     <Link to={`/products/${product._id}`}>{product.name}</Link>
                 </h3>
-                <span>
+                <span className='product-card__price'>
                     {product.lowestPrice !== null ? `BHD ${product.lowestPrice}` : "—"}
                 </span>
             </div>
 
             {product.sizes.length > 0 && (
-                <ul>
+                <ul className='product-card__sizes'>
                     {product.sizes.map((size) => (
                         <li key={size}>{size}</li>
                     ))}

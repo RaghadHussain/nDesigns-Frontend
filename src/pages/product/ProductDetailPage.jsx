@@ -124,121 +124,131 @@ function ProductDetailPage() {
     const hasNoStock = variants.length === 0 || variants.every((variant) => variant.quantity === 0);
 
     return (
-        <div>
-            <Link to='/'>Home</Link>
-            <span> / </span>
-            <Link to='/products'>Shop</Link>
-            {
-                category && (
-                    <>
-                        <span> / </span>
-                        <Link to={`/products?category=${category._id}`}>{category.name}</Link>
+        <div className='product-detail container'>
+            <div className='breadcrumb'>
+                <Link to='/'>Home</Link>
+                <span> / </span>
+                <Link to='/products'>Shop</Link>
+                {
+                    category && (
+                        <>
+                            <span> / </span>
+                            <Link to={`/products?category=${category._id}`}>{category.name}</Link>
 
-                    </>
-                )
-            }
-            <span> / </span>
-            <span>{product.name}</span>
-            {product.images && product.images.length > 0 ? (
-                <div>
-                    <div>
-                        {product.images.map((oneImge, index) => (
-                            <button
-                                type="button"
-                                key={oneImge}
-                                onClick={() => setImage(index)}
-                            >
-                                <img src={`${SERVER_URL}${oneImge}`} alt={`${product.name}`} />
-                            </button>
-                        ))}
-                    </div>
+                        </>
+                    )
+                }
+                <span> / </span>
+                <span>{product.name}</span>
+            </div>
 
-                    <div>
-                        <img src={`${SERVER_URL}${product.images[image]}`} alt={product.name} />
-                    </div>
-                </div>
-            ) : (
-                <div>No image available</div>
-            )}
-
-            <div>
-                {category && <p>{category.name}</p>}
-                <h1>{product.name}</h1>
-                <p>
-                    {selectedVariant
-                        ? `BHD ${selectedVariant.price}`
-                        : hasNoStock
-                        ? "Out of Stock"
-                        : "Select a size"}
-                </p>
-
-                <div>
-                    <div>
-                        <span>Select Size</span>
-                        <Link to="#">Size Guide</Link>
-                    </div>
-                    <div>
-                        {variants.map((variant) => {
-                            const isOutOfStock = variant.quantity === 0;
-                            const isSelected = selectedVariant?._id === variant._id;
-                            return (
+            <div className='product-detail__layout'>
+                {product.images && product.images.length > 0 ? (
+                    <div className='product-detail__gallery'>
+                        <div className='product-detail__thumbs'>
+                            {product.images.map((oneImge, index) => (
                                 <button
                                     type="button"
-                                    key={variant._id}
-                                    disabled={isOutOfStock}
-                                    aria-pressed={isSelected}
-                                    onClick={() => {
-                                        setSelectedVariant(variant);
-                                        setQuantity(1);
-                                    }}
+                                    key={oneImge}
+                                    onClick={() => setImage(index)}
+                                    className={`product-detail__thumb${index === image ? ' product-detail__thumb--active' : ''}`}
                                 >
-                                    {variant.size} {isOutOfStock
-                                        ? "(Out of Stock)"
-                                        : variant.quantity <= 3
-                                        ? `(Only ${variant.quantity} left)`
-                                        : ""}
+                                    <img src={`${SERVER_URL}${oneImge}`} alt={`${product.name}`} />
                                 </button>
-                            );
-                        })}
-                    </div>
-                </div>
+                            ))}
+                        </div>
 
-                {hasNoStock ? (
-                    <p>This product is currently out of stock.</p>
+                        <div className='product-detail__main-image placeholder-image'>
+                            <img src={`${SERVER_URL}${product.images[image]}`} alt={product.name} />
+                        </div>
+                    </div>
                 ) : (
-                    <div>
-                        <button type="button" onClick={decreaseQuantity} disabled={quantity <= 1}>
-                            -
-                        </button>
-                        <span>{quantity}</span>
-                        <button
-                            type="button"
-                            onClick={increaseQuantity}
-                            disabled={!selectedVariant || quantity >= selectedVariant.quantity}
-                        >
-                            +
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleAddToCart}
-                            disabled={!selectedVariant || addingToCart}
-                        >
-                            {addingToCart ? "Adding..." : "Add to Cart"}
-                        </button>
-                    </div>
+                    <div className='product-detail__gallery product-detail__main-image placeholder-image'>No image available</div>
                 )}
-                {cartStatus && <p>{cartStatus}</p>}
 
-                <div>
-                    <h2>Description</h2>
-                    <p>{product.description}</p>
+                <div className='product-detail__info'>
+                    {category && <p className='eyebrow'>{category.name}</p>}
+                    <h1>{product.name}</h1>
+                    <p className='product-detail__price'>
+                        {selectedVariant
+                            ? `BHD ${selectedVariant.price}`
+                            : hasNoStock
+                            ? "Out of Stock"
+                            : "Select a size"}
+                    </p>
+
+                    <div className='product-detail__sizes'>
+                        <div className='product-detail__sizes-header'>
+                            <span>Select Size</span>
+                            <Link to="#">Size Guide</Link>
+                        </div>
+                        <div className='product-detail__size-options'>
+                            {variants.map((variant) => {
+                                const isOutOfStock = variant.quantity === 0;
+                                const isSelected = selectedVariant?._id === variant._id;
+                                return (
+                                    <button
+                                        type="button"
+                                        key={variant._id}
+                                        disabled={isOutOfStock}
+                                        aria-pressed={isSelected}
+                                        onClick={() => {
+                                            setSelectedVariant(variant);
+                                            setQuantity(1);
+                                        }}
+                                        className={`product-detail__size${isSelected ? ' product-detail__size--active' : ''}`}
+                                    >
+                                        {variant.size} {isOutOfStock
+                                            ? "(Out of Stock)"
+                                            : variant.quantity <= 3
+                                            ? `(Only ${variant.quantity} left)`
+                                            : ""}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {hasNoStock ? (
+                        <p className='error'>This product is currently out of stock.</p>
+                    ) : (
+                        <div className='product-detail__actions'>
+                            <div className='stepper'>
+                                <button type="button" onClick={decreaseQuantity} disabled={quantity <= 1}>
+                                    -
+                                </button>
+                                <span>{quantity}</span>
+                                <button
+                                    type="button"
+                                    onClick={increaseQuantity}
+                                    disabled={!selectedVariant || quantity >= selectedVariant.quantity}
+                                >
+                                    +
+                                </button>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={handleAddToCart}
+                                disabled={!selectedVariant || addingToCart}
+                                className='btn product-detail__add-to-cart'
+                            >
+                                {addingToCart ? "Adding..." : "Add to Cart"}
+                            </button>
+                        </div>
+                    )}
+                    {cartStatus && <p className='notice'>{cartStatus}</p>}
+
+                    <div className='product-detail__description'>
+                        <h2>Description</h2>
+                        <p>{product.description}</p>
+                    </div>
                 </div>
             </div>
 
             {recommended.length > 0 && (
-                <div>
+                <div className='product-detail__recommended'>
                     <h2>Recommended for you</h2>
-                    <div>
+                    <div className='product-grid'>
                         {recommended.map((recommendedProduct) => (
                             <ProductCard key={recommendedProduct._id} product={recommendedProduct} />
                         ))}

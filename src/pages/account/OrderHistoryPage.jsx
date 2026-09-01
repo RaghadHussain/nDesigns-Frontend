@@ -34,34 +34,36 @@ function OrderHistoryPage() {
   }
 
   return (
-    <main>
+    <main className='account-page container'>
       <h1>Order History</h1>
 
       {orders.length === 0 ? (
-        <p>You have not placed any orders yet</p>
+        <p className='empty-state'>You have not placed any orders yet</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Order</th>
-              <th>Status</th>
-              <th>Total</th>
-              <th>Date</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.orderStatus}</td>
-                <td>{order.totalAmount}</td>
-                <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td><Link to={`/account/orders/${order._id}`}>View</Link></td>
+        <div className='admin-table-wrap'>
+          <table className='account-table'>
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td><span className={`badge badge--${order.orderStatus.toLowerCase()}`}>{order.orderStatus}</span></td>
+                  <td>{order.totalAmount}</td>
+                  <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                  <td><Link to={`/account/orders/${order._id}`} className='account-table__action'>View</Link></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </main>
   )

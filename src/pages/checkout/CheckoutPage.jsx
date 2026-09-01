@@ -86,61 +86,73 @@ const CheckoutPage = ({}) => {
   const subTotal = cartItems.reduce((sum, item) => sum + item.variantId.price * item.quantity, 0);
 
   return (
-    <main>
+    <main className='checkout-page container'>
       <h1>Checkout</h1>
       <p className='error'>{error}</p>
 
-      <h2>Items</h2>
-      <ul>
-        {cartItems.map((item) => (
-          <li key={item._id}>{item.variantId.size} x {item.quantity} - {item.variantId.price * item.quantity}</li>
-        ))}
-      </ul>
-      <p>Subtotal: {subTotal}</p>
-      <p>Delivery Fee: BHD {deliveryFee}</p>
+      <div className='checkout-layout'>
+        <form onSubmit={handleSubmit} className='checkout-form'>
+          <section className='checkout-section'>
+            <h2>Address</h2>
+            {address
+              ? <p className='checkout-address'>{address.city}, Block {address.block}, Road {address.road}, Building {address.building}</p>
+              : <p className='notice'>No address found. <Link to='/account/profile'>Add one</Link>.</p>}
+          </section>
 
-      <h2>Address</h2>
-      {address
-        ? <p>{address.city}, Block {address.block}, Road {address.road}, Building {address.building}</p>
-        : <p>No address found. <Link to='/account/profile'>Add one</Link>.</p>}
+          <section className='checkout-section'>
+            <h2>Payment</h2>
+            <div className='field'>
+              <label htmlFor='paymentMethod'>Payment Method</label>
+              <select id='paymentMethod' name='paymentMethod' value={formData.paymentMethod} onChange={handleChange}>
+                <option value='cash'>Cash on Delivery</option>
+                <option value='card'>Card</option>
+              </select>
+            </div>
+            <div className='field checkout-discount'>
+              <label htmlFor='discountCode'>Discount Code</label>
+              <div className='checkout-discount__row'>
+                <input
+                  type='text'
+                  id='discountCode'
+                  value={formData.discountCode}
+                  name='discountCode'
+                  onChange={handleChange}
+                />
+                <button type='button' onClick={handleApplyDiscount} className='btn btn--outline btn--sm'>Apply</button>
+              </div>
+              <p className='notice'>{discountMessage}</p>
+            </div>
+            <div className='field'>
+              <label htmlFor='pointsToRedeem'>Points to Redeem</label>
+              <p className='checkout-points-available'>Available Points: {user.loyaltyPoints}</p>
+              <input
+                type='number'
+                id='pointsToRedeem'
+                value={formData.pointsToRedeem}
+                name='pointsToRedeem'
+                onChange={handleChange}
+                min='0'
+                max={user.loyaltyPoints}
+              />
+            </div>
+          </section>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='paymentMethod'>Payment Method:</label>
-          <select id='paymentMethod' name='paymentMethod' value={formData.paymentMethod} onChange={handleChange}>
-            <option value='cash'>Cash on Delivery</option>
-            <option value='card'>Card</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor='discountCode'>Discount Code:</label>
-          <input
-            type='text'
-            id='discountCode'
-            value={formData.discountCode}
-            name='discountCode'
-            onChange={handleChange}
-          />
-          <button type='button' onClick={handleApplyDiscount}>Apply</button>
-          <p>{discountMessage}</p>
-        </div>
-        <div>
-          <label htmlFor='pointsToRedeem'>Points to Redeem:</label>
-          <p>Available Points: {user.loyaltyPoints}</p>
-          <input
-            type='number'
-            id='pointsToRedeem'
-            value={formData.pointsToRedeem}
-            name='pointsToRedeem'
-            onChange={handleChange}
-            min='0'
-            max={user.loyaltyPoints}
-          />
-        </div>
-        <div>
-          <button disabled={!address || cartItems.length === 0}>Place Order</button>
-        </div>
-      </form>
+          <button disabled={!address || cartItems.length === 0} className='btn btn--block checkout-submit'>Place Order</button>
+        </form>
+
+        <aside className='checkout-summary'>
+          <h2>Items</h2>
+          <ul className='line-items'>
+            {cartItems.map((item) => (
+              <li key={item._id} className='line-items__row'>{item.variantId.size} x {item.quantity} - <span>{item.variantId.price * item.quantity}</span></li>
+            ))}
+          </ul>
+          <div className='summary-list'>
+            <div className='summary-list__row'>Subtotal: <span>{subTotal}</span></div>
+            <div className='summary-list__row'>Delivery Fee: <span>BHD {deliveryFee}</span></div>
+          </div>
+        </aside>
+      </div>
     </main>
   );
 };

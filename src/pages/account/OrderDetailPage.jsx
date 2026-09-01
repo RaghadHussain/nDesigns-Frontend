@@ -54,28 +54,36 @@ function OrderDetailPage() {
   }
 
   return (
-    <main>
-      <p><Link to='/account/orders'>Back to Order History</Link></p>
+    <main className='account-page container'>
+      <p className='account-back'><Link to='/account/orders'>Back to Order History</Link></p>
 
-      <h1>Order {order._id}</h1>
-      <p>Status: {order.orderStatus}</p>
-      <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+      <div className='order-detail-card'>
+        <div className='order-detail-card__header'>
+          <div>
+            <h1>Order {order._id}</h1>
+            <p className='order-detail-card__date'>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+          </div>
+          <span className={`badge badge--${order.orderStatus.toLowerCase()}`}>{order.orderStatus}</span>
+        </div>
 
-      <h2>Items</h2>
-      <ul>
-        {items.map((item) => (
-          <li key={item._id}>{item.variantId.size} x {item.quantity} - {item.totalPrice}</li>
-        ))}
-      </ul>
+        <h2>Items</h2>
+        <ul className='line-items'>
+          {items.map((item) => (
+            <li key={item._id} className='line-items__row'>{item.variantId.size} x {item.quantity} - <span>{item.totalPrice}</span></li>
+          ))}
+        </ul>
 
-      <p>Subtotal: {order.subTotal}</p>
-      <p>Discount: {order.discountAmount}</p>
-      <p>Delivery Fee: {order.deliveryFee}</p>
-      <p>Total: {order.totalAmount}</p>
+        <div className='summary-list'>
+          <div className='summary-list__row'>Subtotal: <span>{order.subTotal}</span></div>
+          <div className='summary-list__row'>Discount: <span>{order.discountAmount}</span></div>
+          <div className='summary-list__row'>Delivery Fee: <span>{order.deliveryFee}</span></div>
+          <div className='summary-list__row summary-list__row--total'>Total: <span>{order.totalAmount}</span></div>
+        </div>
 
-      {CANCELLABLE_STATUSES.includes(order.orderStatus) && (
-        <button onClick={handleCancel}>Cancel Order</button>
-      )}
+        {CANCELLABLE_STATUSES.includes(order.orderStatus) && (
+          <button onClick={handleCancel} className='btn btn--danger order-detail-card__cancel'>Cancel Order</button>
+        )}
+      </div>
     </main>
   )
 }

@@ -1,0 +1,66 @@
+/* ============================================================
+   Account — src/pages/account/ProfilePage.jsx, OrderHistoryPage.jsx,
+   OrderDetailPage.jsx
+   ============================================================ */
+
+.account-page { padding: 2.5rem 0 4rem; max-width: 44rem; }
+.account-page h1 { margin-bottom: 0.5rem; }
+.account-back { margin-bottom: 2rem; font-size: 0.88rem; }
+.account-back a { text-decoration: underline; color: var(--nd-text-muted); }
+
+.account-section {
+  border: 1px solid var(--nd-border);
+  border-radius: var(--nd-radius-md);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.account-section h2 { font-size: 1.05rem; margin-bottom: 1.1em; }
+
+.account-detail-list { display: flex; flex-direction: column; gap: 0.85em; }
+.account-detail-list p {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin: 0;
+  padding-bottom: 0.85em;
+  border-bottom: 1px solid var(--nd-border);
+  font-size: 0.92rem;
+  color: var(--nd-text-muted);
+}
+.account-detail-list p span { color: var(--nd-text); font-weight: 600; }
+.account-detail-list button { align-self: flex-start; margin-top: 0.5em; }
+
+.account-table { min-width: 100%; }
+.account-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nd-text-muted);
+  padding: 0 0.75em 0.75em;
+  border-bottom: 1px solid var(--nd-border);
+}
+.account-table td {
+  padding: 1em 0.75em;
+  border-bottom: 1px solid var(--nd-border);
+  font-size: 0.9rem;
+}
+.account-table__action { font-weight: 600; color: var(--nd-green); text-decoration: underline; }
+
+.order-detail-card {
+  border: 1px solid var(--nd-border);
+  border-radius: var(--nd-radius-md);
+  padding: 1.75rem;
+}
+.order-detail-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.order-detail-card__header h1 { margin-bottom: 0.2em; font-size: 1.4rem; }
+.order-detail-card__date { color: var(--nd-text-muted); font-size: 0.85rem; margin: 0; }
+.order-detail-card h2 { font-size: 1rem; }
+.order-detail-card__cancel { margin-top: 1.5rem; }

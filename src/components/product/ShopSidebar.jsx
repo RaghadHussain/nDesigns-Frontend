@@ -12,10 +12,10 @@ function ShopSidebar({
     onToggleSize,
 }) {
     return (
-        <aside>
-            <div>
+        <aside className='shop-sidebar'>
+            <div className='shop-sidebar__section'>
                 <h2>Categories</h2>
-                <ul>
+                <ul className='shop-sidebar__categories'>
                     <li>
                         <label>
                             <input
@@ -43,7 +43,7 @@ function ShopSidebar({
                 </ul>
             </div>
 
-            <div>
+            <div className='shop-sidebar__section'>
                 <h2>Price Range</h2>
                 <input
                     type="range"
@@ -51,22 +51,24 @@ function ShopSidebar({
                     max={maxPriceBound}
                     value={priceCeiling}
                     onChange={(event) => onPriceChange(Number(event.target.value))}
+                    className='shop-sidebar__range'
                 />
-                <div>
+                <div className='shop-sidebar__range-labels'>
                     <span>BHD {minPriceBound}</span>
                     <span>BHD {priceCeiling}</span>
                 </div>
             </div>
 
             {availableSizes.length > 0 && (
-                <div>
+                <div className='shop-sidebar__section'>
                     <h2>Size Availability</h2>
-                    <div>
+                    <div className='shop-sidebar__sizes'>
                         {availableSizes.map((size) => (
                             <button
                                 key={size}
                                 type="button"
                                 onClick={() => onToggleSize(size)}
+                                className={`shop-sidebar__size${selectedSizes.includes(size) ? ' shop-sidebar__size--active' : ''}`}
                             >
                                 {selectedSizes.includes(size) ? `[x] ${size}` : size}
                             </button>

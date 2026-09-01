@@ -5,19 +5,19 @@ function AdminSidebar() {
     const { logout } = useAuth()
 
     return (
-        <aside>
-            <div>
+        <aside className='admin-sidebar'>
+            <div className='admin-sidebar__brand'>
                 <strong>ndesign</strong>
                 <p>Admin Management</p>
             </div>
-            <nav>
-                <Link to="/admin">Dashboard</Link>
-                <Link to="/admin/orders">Orders</Link>
-                <Link to="/admin/products">Products</Link>
-                <Link to="/admin/categories">Categories</Link>
-                <Link to="/admin/discounts">Discounts</Link>
-                <Link to="/admin/settings">Settings</Link>
-                <button type="button" onClick={logout}>Sign Out</button>
+            <nav className='admin-sidebar__nav'>
+                <Link to="/admin" className='admin-sidebar__link'>Dashboard</Link>
+                <Link to="/admin/orders" className='admin-sidebar__link'>Orders</Link>
+                <Link to="/admin/products" className='admin-sidebar__link'>Products</Link>
+                <Link to="/admin/categories" className='admin-sidebar__link'>Categories</Link>
+                <Link to="/admin/discounts" className='admin-sidebar__link'>Discounts</Link>
+                <Link to="/admin/settings" className='admin-sidebar__link'>Settings</Link>
+                <button type="button" onClick={logout} className='admin-sidebar__link admin-sidebar__link--button'>Sign Out</button>
             </nav>
         </aside>
     )

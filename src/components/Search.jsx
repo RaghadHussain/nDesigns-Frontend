@@ -48,13 +48,14 @@ function Search() {
     const suggestions = results.slice(0, SUGGESTIONS_LIMIT);
 
     return (
-        <div>
-            <div>
+        <div className='site-search'>
+            <div className='site-search__box'>
                 <input
                     type="text"
                     id="searchBox"
                     placeholder="Search Here ..."
                     value={query}
+                    className='site-search__input'
                     onChange={(event) => {
                         setQuery(event.target.value);
                         setShowSuggestions(true);
@@ -63,17 +64,17 @@ function Search() {
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
                     onKeyDown={handleKeyDown}
                 />
-                <button type="button" onClick={goToResultsPage} aria-label="Search">
+                <button type="button" onClick={goToResultsPage} aria-label="Search" className='site-search__submit'>
                     <FiSearch />
                 </button>
             </div>
 
             {showSuggestions && query && (
-                <div>
-                    {loading && "Loading..."}
+                <div className='site-search__panel'>
+                    {loading && <span className='site-search__status'>Loading...</span>}
 
                     {!loading && suggestions.length > 0 && (
-                        <div>
+                        <div className='site-search__suggestions'>
                             {suggestions.map((product) => {
                                 const firstImage = product.images && product.images[0];
                                 return (
@@ -81,6 +82,7 @@ function Search() {
                                         key={product._id}
                                         to={`/products/${product._id}`}
                                         onClick={() => setShowSuggestions(false)}
+                                        className='site-search__suggestion'
                                     >
                                         {firstImage && (
                                             <img src={getImageUrl(firstImage)} alt={product.name} width="40" />
@@ -93,7 +95,7 @@ function Search() {
                     )}
 
                     {!loading && suggestions.length === 0 && (
-                        <strong>No Matching Results ...</strong>
+                        <strong className='site-search__status'>No Matching Results ...</strong>
                     )}
                 </div>
             )}

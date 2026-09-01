@@ -42,36 +42,40 @@ const EditCategoryPage = ({}) => {
 
   if (!category) {
     return (
-      <div>
+      <div className='admin-shell'>
         <AdminSidebar />
-        <main><p>Loading...</p></main>
+        <main className='admin-main'><p>Loading...</p></main>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Edit Category</h1>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Edit Category</h1>
+        </div>
         <p className='error'>{error}</p>
-        <form autoComplete='off' onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor='name'>Name:</label>
-            <input
-              type='text'
-              id='name'
-              value={name}
-              name='name'
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <button>Update Category</button>
-            <button type='button' onClick={() => navigate('/admin/categories')}>Cancel</button>
-          </div>
-        </form>
+        <div className='admin-form-card'>
+          <form autoComplete='off' onSubmit={handleSubmit}>
+            <div className='field'>
+              <label htmlFor='name'>Name</label>
+              <input
+                type='text'
+                id='name'
+                value={name}
+                name='name'
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className='form-actions'>
+              <button className='btn'>Update Category</button>
+              <button type='button' onClick={() => navigate('/admin/categories')} className='btn btn--ghost'>Cancel</button>
+            </div>
+          </form>
+        </div>
       </main>
     </div>
   );

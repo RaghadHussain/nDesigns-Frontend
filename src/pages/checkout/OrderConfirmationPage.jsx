@@ -29,23 +29,27 @@ const OrderConfirmationPage = ({}) => {
   if (!order) return <p>Loading...</p>
 
   return (
-    <main>
+    <main className='order-confirmation'>
       <h1>Order Confirmed</h1>
-      <p>Thank you! Your order has been placed.</p>
+      <p className='order-confirmation__intro'>Thank you! Your order has been placed.</p>
 
-      <h2>Order {order._id}</h2>
-      <ul>
-        {items.map((item) => (
-          <li key={item._id}>{item.variantId.size} x {item.quantity} - {item.totalPrice}</li>
-        ))}
-      </ul>
-      <p>Subtotal: {order.subTotal}</p>
-      <p>Discount: {order.discountAmount}</p>
-      <p>Delivery Fee: {order.deliveryFee}</p>
-      <p>Total: {order.totalAmount}</p>
-      <p>Status: {order.orderStatus}</p>
+      <div className='order-confirmation__card'>
+        <h2>Order {order._id}</h2>
+        <ul className='line-items'>
+          {items.map((item) => (
+            <li key={item._id} className='line-items__row'>{item.variantId.size} x {item.quantity} - <span>{item.totalPrice}</span></li>
+          ))}
+        </ul>
+        <div className='summary-list'>
+          <div className='summary-list__row'>Subtotal: <span>{order.subTotal}</span></div>
+          <div className='summary-list__row'>Discount: <span>{order.discountAmount}</span></div>
+          <div className='summary-list__row'>Delivery Fee: <span>{order.deliveryFee}</span></div>
+          <div className='summary-list__row summary-list__row--total'>Total: <span>{order.totalAmount}</span></div>
+        </div>
+        <p className='order-confirmation__status'>Status: <span className={`badge badge--${order.orderStatus.toLowerCase()}`}>{order.orderStatus}</span></p>
+      </div>
 
-      <Link to='/'>Back to Home</Link>
+      <Link to='/' className='order-confirmation__back'>Back to Home</Link>
     </main>
   );
 };

@@ -1,0 +1,28 @@
+/* ============================================================
+   Order (admin) — src/pages/order/AdminOrdersPage.jsx, EditOrderPage.jsx
+   Shell/table styling comes from admin.css; this file covers the
+   order-detail layout and its line items.
+   ============================================================ */
+
+.order-detail {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.order-detail__status { position: sticky; top: 1.5rem; }
+
+.line-items { display: flex; flex-direction: column; margin-bottom: 1.25rem; }
+.line-items__row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7em 0;
+  border-bottom: 1px solid var(--nd-border);
+  font-size: 0.9rem;
+}
+.line-items__row:last-child { border-bottom: none; }
+
+@media (max-width: 900px) {
+  .order-detail { grid-template-columns: 1fr; }
+  .order-detail__status { position: static; }
+}
