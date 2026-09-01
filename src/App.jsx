@@ -69,7 +69,7 @@ function App() {
         <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
         <Route path="/checkout/confirmation/:id" element={<ProtectedRoute><OrderConfirmationPage /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage/></ProtectedRoute>}/>
-        <Route path="/about" element={<ProtectedRoute><About/></ProtectedRoute>}/>
+        <Route path="/about" element={<About/>}/>
 
       </Routes>
       {showFooter && <Footer />}
