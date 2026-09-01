@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 
-import { getAllCategories } from '../../../services/categoryService';
+import { getAllCategories, deleteCategory } from '../../../services/categoryService';
 import { getAllProducts } from '../../../services/productService';
 import AdminSidebar from '../../../components/admin/AdminSidebar';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
@@ -28,6 +28,15 @@ const AdminCategoriesPage = () => {
     }
     fetchData();
   }, []);
+
+  async function handleDelete(id) {
+    try {
+      await deleteCategory(id);
+      setCategories(categories.filter((category) => category._id !== id));
+    } catch (err) {
+      setError(err.message);
+    }
+  }
 
   function toggleParent(parentId) {
     setExpandedParentIds((prev) => {
@@ -79,7 +88,10 @@ const AdminCategoriesPage = () => {
                     <span className='category-tree__chevron'>{isExpanded ? '▼' : '▶'}</span> {parent.name}
                   </button>
                   <Link to={`/admin/categories/${parent._id}`} className='admin-table__action'>Edit</Link>
+                  <button type='button' onClick={() => handleDelete(parent._id)} 
+                  className='admin-table__action admin-table__action--danger'>Delete</button>
                 </div>
+                
 
                 {isExpanded && (
                   <ul className='category-tree__children'>
@@ -91,11 +103,14 @@ const AdminCategoriesPage = () => {
                           <div className='category-tree__row'>
                             <strong>{sub.name}</strong>
                             <Link to={`/admin/categories/${sub._id}`} className='admin-table__action'>Edit</Link>
+                            <button type='button' onClick={() => handleDelete(sub._id)}
+                            className='admin-table__action admin-table__action--danger'>Delete</button>
                           </div>
                           <ul className='category-tree__products'>
                             {subProducts.length === 0 && <li className='category-tree__empty'>No products</li>}
                             {subProducts.map((product) => (
-                              <li key={product._id} className='category-tree__product-item'>{product.name}</li>
+                              <Link key={product._id} to={`/products/${product._id}`} 
+                              className='category-tree__product-item'>{product.name}</Link>
                             ))}
                           </ul>
                         </li>
