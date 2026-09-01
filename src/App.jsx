@@ -37,7 +37,7 @@ function App() {
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   let showFooter = true;
-  if (location.pathname === "/sign-in" || location.pathname === "/sign-up" || isAdminRoute) {
+  if (location.pathname === "/sign-in" || location.pathname === "/sign-up" || location.pathname === "/about" || isAdminRoute) {
     showFooter = false;
   }
 

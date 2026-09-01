@@ -1,7 +1,19 @@
-.error{
-    color: red
-}
+/* Design system foundation: tokens, reset, shared primitives */
+@import "./styles/base.css";
 
-nav a{
-    margin-right: 10px
-}
+/* Shared site chrome (navbar, footer, search) */
+@import "./styles/layout.css";
+
+/* Page groups, one file per pages/ folder */
+@import "./styles/home.css";
+@import "./styles/auth.css";
+@import "./styles/about.css";
+@import "./styles/product.css";
+@import "./styles/cart.css";
+@import "./styles/checkout.css";
+@import "./styles/account.css";
+@import "./styles/admin.css";
+@import "./styles/order.css";
+@import "./styles/discount.css";
+@import "./styles/category.css";
+@import "./styles/settings.css";

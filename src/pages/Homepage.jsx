@@ -5,6 +5,7 @@ import { getAllProducts } from '../services/productService';
 import { getAllCategories } from '../services/categoryService';
 import { getVariantByProduct } from '../services/productVariantService';
 import getImageUrl from '../utils/imageUrl';
+import heroCampaign from '../assets/hero-campaign.png';
 
 const NEW_ARRIVALS_COUNT = 4;
 
@@ -59,7 +60,7 @@ function Homepage() {
           <Link to='/products' className='btn btn--primary'>Shop Now</Link>
         </div>
         <div className='homepage-hero__image placeholder-image'>
-          <span>Featured Campaign Imagery</span>
+          <img src={heroCampaign} alt='Model wearing an ndesign silk halter dress' />
         </div>
       </section>
 

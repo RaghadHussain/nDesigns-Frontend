@@ -157,7 +157,7 @@ function ProductsPage() {
     }
 
     return (
-        <div>
+        <div className='shop-page container'>
             <ShopSidebar
                 categories={categories}
                 productCountByCategory={productCountByCategory}
@@ -172,9 +172,9 @@ function ProductsPage() {
                 onToggleSize={toggleSize}
             />
 
-            <main>
-                <div>
-                    <div>
+            <main className='shop-main'>
+                <div className='shop-main__toolbar'>
+                    <div className='breadcrumb'>
                         <Link to="/">Home</Link>
                         <span> / </span>
                         <Link to="/products">Shop</Link>
@@ -186,7 +186,7 @@ function ProductsPage() {
                         )}
                     </div>
 
-                    <label>
+                    <label className='shop-main__sort'>
                         Sort by:{" "}
                         <select value={sortBy} onChange={(event) => changeSort(event.target.value)}>
                             <option value="newest">Newest Collection</option>
@@ -198,9 +198,9 @@ function ProductsPage() {
                 </div>
 
                 {productsOnPage.length === 0 ? (
-                    <p>No products match your filters.</p>
+                    <p className='empty-state'>No products match your filters.</p>
                 ) : (
-                    <div>
+                    <div className='product-grid'>
                         {productsOnPage.map((product) => (
                             <ProductCard key={product._id} product={product} />
                         ))}
@@ -208,11 +208,12 @@ function ProductsPage() {
                 )}
 
                 {pageCount > 1 && (
-                    <div>
+                    <div className='pagination'>
                         <button
                             type="button"
                             disabled={currentPage === 1}
                             onClick={() => setPage(currentPage - 1)}
+                            className='pagination__nav'
                         >
                             Previous
                         </button>
@@ -222,6 +223,7 @@ function ProductsPage() {
                                 key={number}
                                 disabled={number === currentPage}
                                 onClick={() => setPage(number)}
+                                className={`pagination__page${number === currentPage ? ' pagination__page--active' : ''}`}
                             >
                                 {number}
                             </button>
@@ -230,6 +232,7 @@ function ProductsPage() {
                             type="button"
                             disabled={currentPage === pageCount}
                             onClick={() => setPage(currentPage + 1)}
+                            className='pagination__nav'
                         >
                             Next
                         </button>

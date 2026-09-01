@@ -1,0 +1,218 @@
+/* ============================================================
+   Admin shell — shared by every /admin page:
+   src/pages/AdminDashboard.jsx, src/components/admin/AdminSidebar.jsx
+   Also used by: order.css, discount.css, category.css, settings.css,
+   and the admin/ pages inside product.css
+   ============================================================ */
+
+.admin-shell {
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: var(--nd-cream);
+}
+
+/* ---------- Sidebar ---------- */
+.admin-sidebar {
+  width: 15rem;
+  flex-shrink: 0;
+  min-height: 100vh;
+  background: var(--nd-green);
+  color: var(--nd-text-on-dark);
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.25rem;
+  position: sticky;
+  top: 0;
+}
+.admin-sidebar__brand { margin-bottom: 2.5rem; }
+.admin-sidebar__brand strong {
+  font-family: var(--nd-font-display);
+  font-size: 1.4rem;
+  color: var(--nd-white);
+}
+.admin-sidebar__brand p {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--nd-text-on-dark-muted);
+  margin: 0.2em 0 0;
+}
+.admin-sidebar__nav { display: flex; flex-direction: column; gap: 0.35rem; }
+.admin-sidebar__link {
+  padding: 0.75em 1em;
+  border-radius: var(--nd-radius-sm);
+  font-size: 0.88rem;
+  color: var(--nd-text-on-dark-muted);
+  text-align: left;
+  background: none;
+  border: none;
+}
+.admin-sidebar__link:hover { background: rgba(242, 243, 234, 0.08); color: var(--nd-white); }
+.admin-sidebar__link--button { margin-top: 1.5rem; border-top: 1px solid rgba(242, 243, 234, 0.15); border-radius: 0; padding-top: 1.25em; }
+
+/* ---------- Main content ---------- */
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+}
+.admin-main > .error { margin-bottom: 1.5em; }
+
+.admin-topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.admin-topbar h1 { margin-bottom: 0.2em; }
+.admin-topbar p { color: var(--nd-text-muted); margin: 0; }
+.admin-topbar__user {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.admin-topbar__user::before {
+  content: "";
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--nd-cream);
+}
+
+/* ---------- Generic page header (Orders / Discounts / Categories / Products / Settings) ---------- */
+.admin-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.admin-page-header h1 { margin: 0; }
+.admin-page-header a.btn { text-decoration: none; }
+
+/* ---------- Stat cards ---------- */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--nd-white);
+  border: 1px solid var(--nd-border);
+  border-radius: var(--nd-radius-md);
+  padding: 1.4rem;
+}
+.stat-card__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--nd-text-muted);
+  margin: 0 0 0.6em;
+}
+.stat-card__value {
+  font-family: var(--nd-font-display);
+  font-size: 1.7rem;
+  margin: 0;
+  color: var(--nd-green);
+}
+
+/* ---------- Panel (dashboard live orders, and reusable for any admin card) ---------- */
+.admin-panel {
+  background: var(--nd-white);
+  border: 1px solid var(--nd-border);
+  border-radius: var(--nd-radius-md);
+  padding: 1.5rem;
+}
+.admin-panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.admin-panel__header h2 { margin: 0; font-size: 1.2rem; }
+.admin-panel__controls { display: flex; gap: 0.75rem; }
+.admin-panel__search,
+.admin-panel__filter {
+  padding: 0.6em 0.9em;
+  border: 1px solid var(--nd-border);
+  border-radius: var(--nd-radius-sm);
+  background: var(--nd-cream);
+}
+.admin-panel__search:focus,
+.admin-panel__filter:focus { outline: none; border-color: var(--nd-green); }
+
+/* ---------- Tables (dashboard, orders, discounts, products) ---------- */
+.admin-table-wrap { overflow-x: auto; }
+.admin-table { min-width: 100%; }
+.admin-table th {
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--nd-text-muted);
+  padding: 0 0.9em 0.75em;
+  border-bottom: 1px solid var(--nd-border);
+  white-space: nowrap;
+}
+.admin-table td {
+  padding: 0.95em 0.9em;
+  border-bottom: 1px solid var(--nd-border);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+.admin-table tbody tr:last-child td { border-bottom: none; }
+.admin-table tbody tr:hover { background: var(--nd-cream); }
+.admin-table__action {
+  font-weight: 600;
+  color: var(--nd-green);
+  text-decoration: underline;
+  margin-right: 0.75em;
+  font-size: 0.85rem;
+  background: none;
+  border: none;
+}
+.admin-table__action--danger { color: var(--nd-danger); }
+
+.current-images { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.6rem; }
+.current-images img { border-radius: var(--nd-radius-sm); border: 1px solid var(--nd-border); }
+
+/* ---------- Admin forms (create/edit pages) ---------- */
+.admin-form-card {
+  background: var(--nd-white);
+  border: 1px solid var(--nd-border);
+  border-radius: var(--nd-radius-md);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  max-width: 42rem;
+}
+.admin-form-card h2 { font-size: 1.05rem; margin: 1.75em 0 1em; }
+.admin-form-row {
+  border: 1px solid var(--nd-border);
+  border-radius: var(--nd-radius-sm);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  gap: 0.85rem;
+  align-items: end;
+}
+.admin-form-row .field { margin-bottom: 0; }
+
+@media (max-width: 1080px) {
+  .admin-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+  .admin-shell { flex-direction: column; }
+  .admin-sidebar { width: 100%; min-height: auto; position: static; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+  .admin-sidebar__brand { margin-bottom: 0; }
+  .admin-sidebar__nav { flex-direction: row; flex-wrap: wrap; }
+  .admin-sidebar__link--button { margin-top: 0; border-top: none; padding-top: 0.75em; }
+  .admin-form-row { grid-template-columns: 1fr; }
+}

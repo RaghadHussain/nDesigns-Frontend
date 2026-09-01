@@ -24,34 +24,38 @@ const AdminDiscountsPage = ({}) => {
   }, []);
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Discounts</h1>
-        <Link to='/admin/discounts/new'>Create Discount</Link>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Discounts</h1>
+          <Link to='/admin/discounts/new' className='btn btn--sm'>Create Discount</Link>
+        </div>
         <p className='error'>{error}</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Value</th>
-              <th>Usage</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {discounts.map((discount) => (
-              <tr key={discount._id}>
-                <td>{discount.code}</td>
-                <td>{discount.discountValue}%</td>
-                <td>{discount.usedCount} / {discount.usageLimit}</td>
-                <td>{new Date(discount.startDate).toLocaleDateString()}</td>
-                <td>{new Date(discount.endDate).toLocaleDateString()}</td>
+        <div className='admin-table-wrap'>
+          <table className='admin-table'>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Value</th>
+                <th>Usage</th>
+                <th>Start Date</th>
+                <th>End Date</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {discounts.map((discount) => (
+                <tr key={discount._id}>
+                  <td>{discount.code}</td>
+                  <td>{discount.discountValue}%</td>
+                  <td>{discount.usedCount} / {discount.usageLimit}</td>
+                  <td>{new Date(discount.startDate).toLocaleDateString()}</td>
+                  <td>{new Date(discount.endDate).toLocaleDateString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
   );

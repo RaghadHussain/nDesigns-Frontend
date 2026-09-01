@@ -1,5 +1,5 @@
 import useDocumentTitle from '../../hooks/useDocumentTitle'
-import image from '../../assets/ndesignAbout-bg.png'
+import logoFull from '../../assets/logo-full.png'
 
 function About() {
   useDocumentTitle('About')
@@ -20,8 +20,8 @@ function About() {
           </p>
         </div>
       </section>
-      <section>
-        <img src={image} alt='ndesigns logo' />
+      <section className='about-image'>
+        <img src={logoFull} alt='ndesign logo' />
       </section>
     </main>
   )

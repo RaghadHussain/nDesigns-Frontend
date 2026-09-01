@@ -101,14 +101,17 @@ const CreateProductPage = ({}) => {
   }
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Create Product</h1>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Create Product</h1>
+        </div>
         <p className='error'>{error}</p>
+        <div className='admin-form-card'>
         <form autoComplete='off' onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor='name'>Name:</label>
+          <div className='field'>
+            <label htmlFor='name'>Name</label>
             <input
               type='text'
               id='name'
@@ -118,8 +121,8 @@ const CreateProductPage = ({}) => {
               required
             />
           </div>
-          <div>
-            <label htmlFor='description'>Description:</label>
+          <div className='field'>
+            <label htmlFor='description'>Description</label>
             <textarea
               id='description'
               value={formData.description}
@@ -128,8 +131,8 @@ const CreateProductPage = ({}) => {
               required
             />
           </div>
-          <div>
-            <label htmlFor='category'>Category:</label>
+          <div className='field'>
+            <label htmlFor='category'>Category</label>
             <select
               id='category'
               value={formData.category}
@@ -145,8 +148,8 @@ const CreateProductPage = ({}) => {
                 ))}
             </select>
           </div>
-          <div>
-            <label htmlFor='images'>Images:</label>
+          <div className='field'>
+            <label htmlFor='images'>Images</label>
             <input
               type='file'
               id='images'
@@ -159,45 +162,52 @@ const CreateProductPage = ({}) => {
 
           <h2>Sizes</h2>
           {variants.map((variant, index) => (
-            <div key={index}>
-              <label htmlFor={`size-${index}`}>Size:</label>
-              <input
-                type='text'
-                id={`size-${index}`}
-                value={variant.size}
-                onChange={(event) => handleVariantChange(index, 'size', event.target.value)}
-              />
+            <div key={index} className='admin-form-row'>
+              <div className='field'>
+                <label htmlFor={`size-${index}`}>Size</label>
+                <input
+                  type='text'
+                  id={`size-${index}`}
+                  value={variant.size}
+                  onChange={(event) => handleVariantChange(index, 'size', event.target.value)}
+                />
+              </div>
 
-              <label htmlFor={`price-${index}`}>Price:</label>
-              <input
-                type='number'
-                id={`price-${index}`}
-                value={variant.price}
-                onChange={(event) => handleVariantChange(index, 'price', event.target.value)}
-                min='0'
-              />
+              <div className='field'>
+                <label htmlFor={`price-${index}`}>Price</label>
+                <input
+                  type='number'
+                  id={`price-${index}`}
+                  value={variant.price}
+                  onChange={(event) => handleVariantChange(index, 'price', event.target.value)}
+                  min='0'
+                />
+              </div>
 
-              <label htmlFor={`quantity-${index}`}>Quantity:</label>
-              <input
-                type='number'
-                id={`quantity-${index}`}
-                value={variant.quantity}
-                onChange={(event) => handleVariantChange(index, 'quantity', event.target.value)}
-                min='0'
-              />
+              <div className='field'>
+                <label htmlFor={`quantity-${index}`}>Quantity</label>
+                <input
+                  type='number'
+                  id={`quantity-${index}`}
+                  value={variant.quantity}
+                  onChange={(event) => handleVariantChange(index, 'quantity', event.target.value)}
+                  min='0'
+                />
+              </div>
 
               {variants.length > 1 && (
-                <button type='button' onClick={() => removeVariantRow(index)}>Remove</button>
+                <button type='button' onClick={() => removeVariantRow(index)} className='btn btn--ghost btn--sm'>Remove</button>
               )}
             </div>
           ))}
-          <button type='button' onClick={addVariantRow}>Add Size</button>
+          <button type='button' onClick={addVariantRow} className='btn btn--outline btn--sm'>Add Size</button>
 
-          <div>
-            <button disabled={submitting}>{submitting ? 'Creating...' : 'Create Product'}</button>
-            <button type='button' onClick={() => navigate('/admin/products')}>Cancel</button>
+          <div className='form-actions'>
+            <button disabled={submitting} className='btn'>{submitting ? 'Creating...' : 'Create Product'}</button>
+            <button type='button' onClick={() => navigate('/admin/products')} className='btn btn--ghost'>Cancel</button>
           </div>
         </form>
+        </div>
       </main>
     </div>
   );

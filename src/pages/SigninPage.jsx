@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { signIn } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+import logoIcon from '../assets/logo-icon.png';
 
 
 const SignInForm = ({}) => {
@@ -42,39 +43,42 @@ const SignInForm = ({}) => {
   };
 
   return (
-    <main>
-      <h1>Sign In</h1>
-      <p className='error'>{error}</p>
-      <form autoComplete='off' onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='email'>Username:</label>
-          <input
-            type='text'
-            autoComplete='off'
-            id='username'
-            value={formData.username}
-            name='username'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input
-            type='password'
-            autoComplete='off'
-            id='password'
-            value={formData.password}
-            name='password'
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <button>Sign In</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
-        </div>
-      </form>
+    <main className='auth-page'>
+      <div className='auth-card'>
+        <img src={logoIcon} alt='ndesign' className='auth-card__brand' />
+        <p className='auth-card__subtitle'>Welcome back. Access your saved wishlist and bespoke orders.</p>
+        <p className='error'>{error}</p>
+        <form autoComplete='off' onSubmit={handleSubmit} className='auth-form'>
+          <div className='field'>
+            <label htmlFor='email'>Username</label>
+            <input
+              type='text'
+              autoComplete='off'
+              id='username'
+              value={formData.username}
+              name='username'
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className='field'>
+            <label htmlFor='password'>Password</label>
+            <input
+              type='password'
+              autoComplete='off'
+              id='password'
+              value={formData.password}
+              name='password'
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className='form-actions'>
+            <button className='btn btn--block'>Sign In</button>
+            <button onClick={() => navigate('/')} className='btn btn--ghost btn--block'>Cancel</button>
+          </div>
+        </form>
+      </div>
     </main>
   );
 };

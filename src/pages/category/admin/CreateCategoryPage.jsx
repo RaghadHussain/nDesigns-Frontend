@@ -46,42 +46,46 @@ const CreateCategoryPage = ({}) => {
   }
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Create Category</h1>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Create Category</h1>
+        </div>
         <p className='error'>{error}</p>
-        <form autoComplete='off' onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor='name'>Name:</label>
-            <input
-              type='text'
-              id='name'
-              value={formData.name}
-              name='name'
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor='parentCategory'>Parent Category:</label>
-            <select
-              id='parentCategory'
-              value={formData.parentCategory}
-              name='parentCategory'
-              onChange={handleChange}
-            >
-              <option value=''>None</option>
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>{category.name}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <button>Create Category</button>
-            <button type='button' onClick={() => navigate('/admin/categories')}>Cancel</button>
-          </div>
-        </form>
+        <div className='admin-form-card'>
+          <form autoComplete='off' onSubmit={handleSubmit}>
+            <div className='field'>
+              <label htmlFor='name'>Name</label>
+              <input
+                type='text'
+                id='name'
+                value={formData.name}
+                name='name'
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className='field'>
+              <label htmlFor='parentCategory'>Parent Category</label>
+              <select
+                id='parentCategory'
+                value={formData.parentCategory}
+                name='parentCategory'
+                onChange={handleChange}
+              >
+                <option value=''>None</option>
+                {categories.map((category) => (
+                  <option key={category._id} value={category._id}>{category.name}</option>
+                ))}
+              </select>
+            </div>
+            <div className='form-actions'>
+              <button className='btn'>Create Category</button>
+              <button type='button' onClick={() => navigate('/admin/categories')} className='btn btn--ghost'>Cancel</button>
+            </div>
+          </form>
+        </div>
       </main>
     </div>
   );

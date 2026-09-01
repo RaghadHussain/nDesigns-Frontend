@@ -135,22 +135,25 @@ const EditProductPage = ({}) => {
 
   if (!product) {
     return (
-      <div>
+      <div className='admin-shell'>
         <AdminSidebar />
-        <main><p>Loading...</p></main>
+        <main className='admin-main'><p>Loading...</p></main>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Edit Product</h1>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Edit Product</h1>
+        </div>
         <p className='error'>{error}</p>
+        <div className='admin-form-card'>
         <form autoComplete='off' onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor='name'>Name:</label>
+          <div className='field'>
+            <label htmlFor='name'>Name</label>
             <input
               type='text'
               id='name'
@@ -160,8 +163,8 @@ const EditProductPage = ({}) => {
               required
             />
           </div>
-          <div>
-            <label htmlFor='description'>Description:</label>
+          <div className='field'>
+            <label htmlFor='description'>Description</label>
             <textarea
               id='description'
               value={formData.description}
@@ -170,8 +173,8 @@ const EditProductPage = ({}) => {
               required
             />
           </div>
-          <div>
-            <label htmlFor='category'>Category:</label>
+          <div className='field'>
+            <label htmlFor='category'>Category</label>
             <select
               id='category'
               value={formData.category}
@@ -189,15 +192,17 @@ const EditProductPage = ({}) => {
           </div>
 
           {product.images && product.images.length > 0 && (
-            <div>
+            <div className='field'>
               <span>Current Images:</span>
-              {product.images.map((image) => (
-                <img key={image} src={getImageUrl(image)} alt={product.name} width='80' />
-              ))}
+              <div className='current-images'>
+                {product.images.map((image) => (
+                  <img key={image} src={getImageUrl(image)} alt={product.name} width='80' />
+                ))}
+              </div>
             </div>
           )}
-          <div>
-            <label htmlFor='images'>Replace Images (leave empty to keep current):</label>
+          <div className='field'>
+            <label htmlFor='images'>Replace Images (leave empty to keep current)</label>
             <input
               type='file'
               id='images'
@@ -210,43 +215,50 @@ const EditProductPage = ({}) => {
 
           <h2>Sizes</h2>
           {variants.map((variant) => (
-            <div key={variant.key}>
-              <label htmlFor={`size-${variant.key}`}>Size:</label>
-              <input
-                type='text'
-                id={`size-${variant.key}`}
-                value={variant.size}
-                onChange={(event) => handleVariantChange(variant.key, 'size', event.target.value)}
-              />
+            <div key={variant.key} className='admin-form-row'>
+              <div className='field'>
+                <label htmlFor={`size-${variant.key}`}>Size</label>
+                <input
+                  type='text'
+                  id={`size-${variant.key}`}
+                  value={variant.size}
+                  onChange={(event) => handleVariantChange(variant.key, 'size', event.target.value)}
+                />
+              </div>
 
-              <label htmlFor={`price-${variant.key}`}>Price:</label>
-              <input
-                type='number'
-                id={`price-${variant.key}`}
-                value={variant.price}
-                onChange={(event) => handleVariantChange(variant.key, 'price', event.target.value)}
-                min='0'
-              />
+              <div className='field'>
+                <label htmlFor={`price-${variant.key}`}>Price</label>
+                <input
+                  type='number'
+                  id={`price-${variant.key}`}
+                  value={variant.price}
+                  onChange={(event) => handleVariantChange(variant.key, 'price', event.target.value)}
+                  min='0'
+                />
+              </div>
 
-              <label htmlFor={`quantity-${variant.key}`}>Quantity:</label>
-              <input
-                type='number'
-                id={`quantity-${variant.key}`}
-                value={variant.quantity}
-                onChange={(event) => handleVariantChange(variant.key, 'quantity', event.target.value)}
-                min='0'
-              />
+              <div className='field'>
+                <label htmlFor={`quantity-${variant.key}`}>Quantity</label>
+                <input
+                  type='number'
+                  id={`quantity-${variant.key}`}
+                  value={variant.quantity}
+                  onChange={(event) => handleVariantChange(variant.key, 'quantity', event.target.value)}
+                  min='0'
+                />
+              </div>
 
-              <button type='button' onClick={() => removeVariantRow(variant.key)}>Remove</button>
+              <button type='button' onClick={() => removeVariantRow(variant.key)} className='btn btn--ghost btn--sm'>Remove</button>
             </div>
           ))}
-          <button type='button' onClick={addVariantRow}>Add Size</button>
+          <button type='button' onClick={addVariantRow} className='btn btn--outline btn--sm'>Add Size</button>
 
-          <div>
-            <button disabled={submitting}>{submitting ? 'Saving...' : 'Save Changes'}</button>
-            <button type='button' onClick={() => navigate('/admin/products')}>Cancel</button>
+          <div className='form-actions'>
+            <button disabled={submitting} className='btn'>{submitting ? 'Saving...' : 'Save Changes'}</button>
+            <button type='button' onClick={() => navigate('/admin/products')} className='btn btn--ghost'>Cancel</button>
           </div>
         </form>
+        </div>
       </main>
     </div>
   );

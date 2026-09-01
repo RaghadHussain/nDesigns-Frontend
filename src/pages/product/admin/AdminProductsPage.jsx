@@ -32,35 +32,39 @@ const AdminProductsPage = ({}) => {
   }
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Products</h1>
-        <Link to='/admin/products/new'>Create Product</Link>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Products</h1>
+          <Link to='/admin/products/new' className='btn btn--sm'>Create Product</Link>
+        </div>
         <p className='error'>{error}</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Created</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product.name}</td>
-                <td>{product.category?.name || '—'}</td>
-                <td>{new Date(product.createdAt).toLocaleDateString()}</td>
-                <td>
-                  <Link to={`/admin/products/${product._id}`}>Edit</Link>
-                  <button type='button' onClick={() => handleDelete(product._id)}>Delete</button>
-                </td>
+        <div className='admin-table-wrap'>
+          <table className='admin-table'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Created</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product.name}</td>
+                  <td>{product.category?.name || '—'}</td>
+                  <td>{new Date(product.createdAt).toLocaleDateString()}</td>
+                  <td>
+                    <Link to={`/admin/products/${product._id}`} className='admin-table__action'>Edit</Link>
+                    <button type='button' onClick={() => handleDelete(product._id)} className='admin-table__action admin-table__action--danger'>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
   );

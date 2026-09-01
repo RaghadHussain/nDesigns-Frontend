@@ -46,43 +46,47 @@ const SettingsPage = ({}) => {
   }
 
   return (
-    <div>
+    <div className='admin-shell'>
       <AdminSidebar />
-      <main>
-        <h1>Settings</h1>
+      <main className='admin-main'>
+        <div className='admin-page-header'>
+          <h1>Settings</h1>
+        </div>
         <p className='error'>{error}</p>
-        <p>{message}</p>
-        <form autoComplete='off' onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor='deliveryFee'>Delivery Fee (BHD):</label>
-            <input
-              type='number'
-              id='deliveryFee'
-              value={formData.deliveryFee}
-              name='deliveryFee'
-              onChange={handleChange}
-              min='0'
-              step='0.01'
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor='pointsPerBHD'>Points Earned per BHD Spent:</label>
-            <input
-              type='number'
-              id='pointsPerBHD'
-              value={formData.pointsPerBHD}
-              name='pointsPerBHD'
-              onChange={handleChange}
-              min='0'
-              step='0.01'
-              required
-            />
-          </div>
-          <div>
-            <button>Save</button>
-          </div>
-        </form>
+        <p className='notice'>{message}</p>
+        <div className='admin-form-card'>
+          <form autoComplete='off' onSubmit={handleSubmit}>
+            <div className='field'>
+              <label htmlFor='deliveryFee'>Delivery Fee (BHD)</label>
+              <input
+                type='number'
+                id='deliveryFee'
+                value={formData.deliveryFee}
+                name='deliveryFee'
+                onChange={handleChange}
+                min='0'
+                step='0.01'
+                required
+              />
+            </div>
+            <div className='field'>
+              <label htmlFor='pointsPerBHD'>Points Earned per BHD Spent</label>
+              <input
+                type='number'
+                id='pointsPerBHD'
+                value={formData.pointsPerBHD}
+                name='pointsPerBHD'
+                onChange={handleChange}
+                min='0'
+                step='0.01'
+                required
+              />
+            </div>
+            <div className='form-actions'>
+              <button className='btn'>Save</button>
+            </div>
+          </form>
+        </div>
       </main>
     </div>
   );

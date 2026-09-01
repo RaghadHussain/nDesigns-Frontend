@@ -53,13 +53,13 @@ function SearchResultsPage() {
     }
 
     return (
-        <div>
+        <div className='search-results container'>
             <h2>Search Results for "{query}"</h2>
 
             {products.length === 0 ? (
-                <p>No products match "{query}".</p>
+                <p className='empty-state'>No products match "{query}".</p>
             ) : (
-                <div>
+                <div className='product-grid'>
                     {products.map((product) => (
                         <ProductCard key={product._id} product={product} />
                     ))}

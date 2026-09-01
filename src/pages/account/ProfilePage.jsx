@@ -125,19 +125,19 @@ function ProfilePage() {
   }
 
   return (
-    <main>
+    <main className='account-page container'>
       <h1>My Profile</h1>
 
-      <p><Link to='/account/orders'>View Order History</Link></p>
+      <p className='account-back'><Link to='/account/orders'>View Order History</Link></p>
 
-      <section>
+      <section className='account-section'>
         <h2>Account Details</h2>
         <p className='error'>{userError}</p>
 
         {isEditingUser ? (
           <form onSubmit={handleUserSubmit}>
-            <div>
-              <label htmlFor='username'>Username:</label>
+            <div className='field'>
+              <label htmlFor='username'>Username</label>
               <input
                 type='text'
                 id='username'
@@ -147,8 +147,8 @@ function ProfilePage() {
                 required
               />
             </div>
-            <div>
-              <label htmlFor='email'>Email:</label>
+            <div className='field'>
+              <label htmlFor='email'>Email</label>
               <input
                 type='email'
                 id='email'
@@ -158,8 +158,8 @@ function ProfilePage() {
                 required
               />
             </div>
-            <div>
-              <label htmlFor='phoneNumber'>Phone Number:</label>
+            <div className='field'>
+              <label htmlFor='phoneNumber'>Phone Number</label>
               <input
                 type='Number'
                 id='phoneNumber'
@@ -169,30 +169,30 @@ function ProfilePage() {
                 required
               />
             </div>
-            <div>
-              <button type='submit'>Save</button>
-              <button type='button' onClick={() => setIsEditingUser(false)}>Cancel</button>
+            <div className='form-actions'>
+              <button type='submit' className='btn'>Save</button>
+              <button type='button' onClick={() => setIsEditingUser(false)} className='btn btn--ghost'>Cancel</button>
             </div>
           </form>
         ) : (
-          <div>
-            <p>Username: {user.username}</p>
-            <p>Email: {user.email}</p>
-            <p>Phone Number: {user.phoneNumber}</p>
-            <p>Loyalty Points: {user.loyaltyPoints}</p>
-            <button onClick={startEditUser}>Edit</button>
+          <div className='account-detail-list'>
+            <p>Username: <span>{user.username}</span></p>
+            <p>Email: <span>{user.email}</span></p>
+            <p>Phone Number: <span>{user.phoneNumber}</span></p>
+            <p>Loyalty Points: <span>{user.loyaltyPoints}</span></p>
+            <button onClick={startEditUser} className='btn btn--outline btn--sm'>Edit</button>
           </div>
         )}
       </section>
 
-      <section>
+      <section className='account-section'>
         <h2>Address</h2>
         <p className='error'>{addressError}</p>
 
         {isEditingAddress ? (
           <form autoComplete='off' onSubmit={handleAddressSubmit}>
-            <div>
-              <label htmlFor='city'>City:</label>
+            <div className='field'>
+              <label htmlFor='city'>City</label>
               <input
                 type='text'
                 id='city'
@@ -202,8 +202,8 @@ function ProfilePage() {
                 required
               />
             </div>
-            <div>
-              <label htmlFor='block'>Block:</label>
+            <div className='field'>
+              <label htmlFor='block'>Block</label>
               <input
                 type='number'
                 id='block'
@@ -213,8 +213,8 @@ function ProfilePage() {
                 required
               />
             </div>
-            <div>
-              <label htmlFor='road'>Road:</label>
+            <div className='field'>
+              <label htmlFor='road'>Road</label>
               <input
                 type='number'
                 id='road'
@@ -224,8 +224,8 @@ function ProfilePage() {
                 required
               />
             </div>
-            <div>
-              <label htmlFor='building'>Building:</label>
+            <div className='field'>
+              <label htmlFor='building'>Building</label>
               <input
                 type='number'
                 id='building'
@@ -235,8 +235,8 @@ function ProfilePage() {
                 required
               />
             </div>
-            <div>
-              <label htmlFor='apartment'>Apartment:</label>
+            <div className='field'>
+              <label htmlFor='apartment'>Apartment</label>
               <input
                 type='number'
                 id='apartment'
@@ -245,8 +245,8 @@ function ProfilePage() {
                 onChange={handleAddressChange}
               />
             </div>
-            <div>
-              <label htmlFor='note'>Note:</label>
+            <div className='field'>
+              <label htmlFor='note'>Note</label>
               <input
                 type='text'
                 id='note'
@@ -255,27 +255,27 @@ function ProfilePage() {
                 onChange={handleAddressChange}
               />
             </div>
-            <div>
-              <button type='submit'>Save</button>
-              <button type='button' onClick={() => setIsEditingAddress(false)}>Cancel</button>
+            <div className='form-actions'>
+              <button type='submit' className='btn'>Save</button>
+              <button type='button' onClick={() => setIsEditingAddress(false)} className='btn btn--ghost'>Cancel</button>
             </div>
           </form>
         ) : address ? (
-          <div>
-            <p>City: {address.city}</p>
-            <p>Block: {address.block}</p>
-            <p>Road: {address.road}</p>
-            <p>Building: {address.building}</p>
+          <div className='account-detail-list'>
+            <p>City: <span>{address.city}</span></p>
+            <p>Block: <span>{address.block}</span></p>
+            <p>Road: <span>{address.road}</span></p>
+            <p>Building: <span>{address.building}</span></p>
             {address.apartment !== undefined && address.apartment !== null && (
-              <p>Apartment: {address.apartment}</p>
+              <p>Apartment: <span>{address.apartment}</span></p>
             )}
-            {address.note && <p>Note: {address.note}</p>}
-            <button onClick={startEditAddress}>Edit</button>
+            {address.note && <p>Note: <span>{address.note}</span></p>}
+            <button onClick={startEditAddress} className='btn btn--outline btn--sm'>Edit</button>
           </div>
         ) : (
-          <div>
+          <div className='account-detail-list'>
             <p>No address yet</p>
-            <button onClick={startEditAddress}>Add Address</button>
+            <button onClick={startEditAddress} className='btn btn--outline btn--sm'>Add Address</button>
           </div>
         )}
       </section>
