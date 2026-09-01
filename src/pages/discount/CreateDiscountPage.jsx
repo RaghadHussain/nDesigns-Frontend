@@ -5,6 +5,8 @@ import { createDiscount } from '../../services/discountService';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
+const TODAY = new Date().toISOString().split('T')[0];
+
 const CreateDiscountPage = ({}) => {
   useDocumentTitle("Create Discount")
   const navigate = useNavigate();
@@ -83,6 +85,7 @@ const CreateDiscountPage = ({}) => {
               value={formData.startDate}
               name='startDate'
               onChange={handleChange}
+              min={TODAY}
               required
             />
           </div>
@@ -94,6 +97,7 @@ const CreateDiscountPage = ({}) => {
               value={formData.endDate}
               name='endDate'
               onChange={handleChange}
+              min={formData.startDate || TODAY}
               required
             />
           </div>
