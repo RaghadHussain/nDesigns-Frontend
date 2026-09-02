@@ -15,6 +15,7 @@
 .homepage-hero__content h1 { margin-bottom: 0.4em; }
 .homepage-hero__content p { color: var(--nd-text-muted); max-width: 32rem; margin-bottom: 1.75em; }
 .homepage-hero__image { aspect-ratio: 4 / 3; border-radius: var(--nd-radius-lg); }
+.homepage-hero__image img { object-position: center center; }
 
 .homepage-curation {
   max-width: var(--nd-container);

@@ -73,6 +73,7 @@
   padding: 1.5rem;
   position: sticky;
   top: 1.5rem;
+  background: var(--nd-white);
 }
 .shop-sidebar__section { margin-bottom: 2rem; }
 .shop-sidebar__section:last-child { margin-bottom: 0; }
