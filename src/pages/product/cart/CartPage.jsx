@@ -29,7 +29,7 @@ function CartPage() {
             const itemsWithProducts = await Promise.all(
                 items.map(async (item) => {
                     const variant = item.variantId;
-                    const product = await getProductById(variant.productId);
+                    const product = await getProductById(variant.productId._id);
                     return { ...item, variant, product };
                 })
             );

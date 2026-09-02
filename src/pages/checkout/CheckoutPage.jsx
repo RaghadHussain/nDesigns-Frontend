@@ -148,7 +148,7 @@ const CheckoutPage = ({}) => {
           <h2>Items</h2>
           <ul className='line-items'>
             {cartItems.map((item) => (
-              <li key={item._id} className='line-items__row'>{item.variantId.size} x {item.quantity} - <span>{item.variantId.price * item.quantity}</span></li>
+              <li key={item._id} className='line-items__row'>{item.variantId.productId.name} ({item.variantId.size}) x {item.quantity} - <span>{item.variantId.price * item.quantity}</span></li>
             ))}
           </ul>
           <div className='summary-list'>
