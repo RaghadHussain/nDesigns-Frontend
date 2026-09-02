@@ -37,7 +37,7 @@ const OrderConfirmationPage = ({}) => {
         <h2>Order {order._id}</h2>
         <ul className='line-items'>
           {items.map((item) => (
-            <li key={item._id} className='line-items__row'>{item.variantId.size} x {item.quantity} - <span>{item.totalPrice}</span></li>
+            <li key={item._id} className='line-items__row'>{item.variantId.productId.name} ({item.variantId.size}) x {item.quantity} - <span>{item.totalPrice}</span></li>
           ))}
         </ul>
         <div className='summary-list'>
