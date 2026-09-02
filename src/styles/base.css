@@ -136,12 +136,16 @@ fieldset { border: none; margin: 0; padding: 0; }
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .btn:hover { background: var(--nd-green-hover); border-color: var(--nd-green-hover); }
+.btn:active:not(.btn--ghost):not(.btn--outline),
+.btn:focus:not(.btn--ghost):not(.btn--outline) { color: var(--nd-white); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn--primary { background: var(--nd-green); color: var(--nd-white); }
 .btn--outline { background: transparent; color: var(--nd-green); }
 .btn--outline:hover { background: var(--nd-green); color: var(--nd-white); }
 .btn--ghost { background: transparent; border-color: var(--nd-border); color: var(--nd-text); }
-.btn--ghost:hover { border-color: var(--nd-green); }
+.btn--ghost:hover,
+.btn--ghost:active,
+.btn--ghost:focus { background: transparent; border-color: var(--nd-green); color: var(--nd-text); }
 .btn--sm { padding: 0.55em 1.1em; font-size: 0.72rem; }
 .btn--block { width: 100%; }
 .btn--danger { background: var(--nd-danger); border-color: var(--nd-danger); }

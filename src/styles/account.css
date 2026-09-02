@@ -17,6 +17,14 @@
 }
 .account-section h2 { font-size: 1.05rem; margin-bottom: 1.1em; }
 
+/* Profile page cards: A5 paper width (148mm), centered, height follows content */
+.account-page--profile .account-section {
+  width: 148mm;
+  max-width: 100%;
+  background: var(--nd-white);
+  margin: 0 auto 1.5rem;
+}
+
 .account-detail-list { display: flex; flex-direction: column; gap: 0.85em; }
 .account-detail-list p {
   display: flex;
