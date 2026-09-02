@@ -70,7 +70,7 @@ const SettingsPage = ({}) => {
               />
             </div>
             <div className='field'>
-              <label htmlFor='pointsPerBHD'>Points Earned per BHD Spent</label>
+              <label htmlFor='pointsPerBHD'>BHD per Loyalty Point</label>
               <input
                 type='number'
                 id='pointsPerBHD'
@@ -81,6 +81,7 @@ const SettingsPage = ({}) => {
                 step='0.01'
                 required
               />
+              <p className='field-hint'>e.g. 10 means customers earn 1 point per 10 BHD spent, and can redeem 10 points for 1 BHD off at checkout.</p>
             </div>
             <div className='form-actions'>
               <button className='btn'>Save</button>
