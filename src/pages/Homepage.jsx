@@ -5,7 +5,7 @@ import { getAllProducts } from '../services/productService';
 import { getAllCategories } from '../services/categoryService';
 import { getVariantByProduct } from '../services/productVariantService';
 import getImageUrl from '../utils/imageUrl';
-import heroCampaign from '../assets/hero-campaign.png';
+import heroCampaign from '../assets/DSC07010.JPG';
 
 const NEW_ARRIVALS_COUNT = 4;
 
@@ -73,7 +73,7 @@ function Homepage() {
           {curationCategories.map((category) => (
             <div key={category._id} className='homepage-curation__card'>
               <div className='placeholder-image'>
-                <span>{category.name}</span>
+                <img src='/DSC06894.JPG' alt={category.name} />
               </div>
               <div className='homepage-curation__card-footer'>
                 <h3>{category.name}</h3>
